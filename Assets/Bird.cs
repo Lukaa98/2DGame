@@ -47,6 +47,7 @@ public class Bird : MonoBehaviour
     {
         GetComponent<SpriteRenderer>().color = Color.red; //GetComponent is built in method to 
                                                           //acces components inside unity
+        GetComponent<LineRenderer>().enabled = true;
     }
 
     private void OnMouseUp() // //built in method called when mouse is unclicked (this case bird gets white)
@@ -57,6 +58,9 @@ public class Bird : MonoBehaviour
         GetComponent<Rigidbody2D>().AddForce(dirictionToInitialPosition * _lauchPower);
         GetComponent<Rigidbody2D>().gravityScale = 1;
         _birdWasLaunched = true;
+
+        GetComponent<LineRenderer>().enabled = false;
+
 
     }
 
