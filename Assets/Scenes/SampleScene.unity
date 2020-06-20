@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 249398738}
   - component: {fileID: 249398742}
   - component: {fileID: 249398741}
+  - component: {fileID: 249398743}
   m_Layer: 0
   m_Name: Purple Monster 1
   m_TagString: Untagged
@@ -271,6 +272,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &249398743
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249398737}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4ce7c2346caf914ab488ebf236a833c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &295156660
 GameObject:
   m_ObjectHideFlags: 0
@@ -599,6 +612,7 @@ GameObject:
   - component: {fileID: 1103039329}
   - component: {fileID: 1103039333}
   - component: {fileID: 1103039332}
+  - component: {fileID: 1103039334}
   m_Layer: 0
   m_Name: Green Monster - One eye10
   m_TagString: Untagged
@@ -736,6 +750,18 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1103039334
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1103039328}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4ce7c2346caf914ab488ebf236a833c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1110014343
 GameObject:
   m_ObjectHideFlags: 0

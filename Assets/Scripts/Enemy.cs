@@ -24,8 +24,10 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-
-        
+           if (collision.contacts[0].normal.y < -0.5)  //if we hit from the top
+           {
+               Destroy(gameObject);
+           }
       }
 
 }
