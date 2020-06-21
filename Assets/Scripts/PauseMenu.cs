@@ -21,6 +21,22 @@ public class PauseMenu : MonoBehaviour
         PauseButton.SetActive (true);
         Time.timeScale = 1;
     }
+
+    public void Restart()
+    {
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
+    public void MainMenu()
+    {
+        
+    }
+
+    public void Quit()
+    {
+        
+    }
+
  
 
 
