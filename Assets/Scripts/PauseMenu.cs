@@ -1,12 +1,13 @@
-﻿using System.Collections;
+﻿
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PauseMenu : MonoBehaviour
 {
 
-    public GameObject Pausemenu;
-    public GameObject PauseButton;
+   public GameObject Pausemenu;
+   public GameObject PauseButton;
 
     public void Pause() 
 
@@ -29,7 +30,7 @@ public class PauseMenu : MonoBehaviour
 
     public void MainMenu()
     {
-       Application.LoadLevel(0) ;
+      Application.LoadLevel(0) ;
     }
 
     public void Quit()
