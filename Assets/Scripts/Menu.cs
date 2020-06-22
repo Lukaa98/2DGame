@@ -1,20 +1,17 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 
 public class Menu : MonoBehaviour
 {
 
-    public GameObject start;
-    //public GameObject levels;
-    //public GameObject Exit;
-
-
-    public void Start()
+     public void Menu(int SceneIndex)
     {
-       Application.LoadLevel(1);
+        SceneManager.Menu(SceneIndex);
+
     }
 
-    
-
 }
+*/

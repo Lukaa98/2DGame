@@ -3300,6 +3300,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SceneManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7235970123643065881, guid: 1eaf48dc776c31e4c8dff1af6652566d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7235970123643065887, guid: 1eaf48dc776c31e4c8dff1af6652566d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3368,6 +3373,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6920544831935645571, guid: abfb318726b914648a16fb7acea83b96,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6920544831935645583, guid: abfb318726b914648a16fb7acea83b96,
         type: 3}
