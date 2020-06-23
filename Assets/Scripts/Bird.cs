@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Bird : MonoBehaviour
 {
+    bool isAlreadyClicked = false;
 
     private Vector3 _initialPosition;
     private bool _birdWasLaunched;
@@ -48,6 +49,13 @@ public class Bird : MonoBehaviour
         GetComponent<SpriteRenderer>().color = Color.red; //GetComponent is built in method to 
                                                           //acces components inside unity
         GetComponent<LineRenderer>().enabled = true;
+
+        if ( !isAlreadyClicked){
+                 GetComponent<SpriteRenderer>().color = Color.blue; //GetComponent is built in method to 
+ 
+         isAlreadyClicked = false;
+    }
+
     }
 
     private void OnMouseUp() // //built in method called when mouse is unclicked (this case bird gets white)
