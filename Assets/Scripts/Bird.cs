@@ -41,6 +41,11 @@ public class Bird : MonoBehaviour
             string currentSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(currentSceneName);
         }
+        if (_birdWasLaunched == false)
+        {
+            Debug.Log("sda");
+            CancelInvoke("OnMouseDrag");
+        }
     }
 
     private void OnMouseDown()  //built in method called when mouse is clicked (this case bird gets red)
@@ -61,12 +66,6 @@ public class Bird : MonoBehaviour
 
         GetComponent<LineRenderer>().enabled = false;
 
-
-if(_birdWasLaunched = true)
-{
-        Debug.Log("bird was launched")
-
-}
 
     }
 
