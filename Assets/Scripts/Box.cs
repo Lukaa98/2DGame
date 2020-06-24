@@ -1,22 +1,23 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
-
 public class Box : MonoBehaviour
 {
-    
+private bool isClicked = false;
 
-  
-
-    private void OnMouseDown()  //built in method called when mouse is clicked (this case bird gets red)
-    {
-        GetComponent<SpriteRenderer>().color = Color.red; //GetComponent is built in method to 
-                                                          //acces components inside unity
-    }
-
-    private void OnMouseUp() // //built in method called when mouse is unclicked (this case bird gets white)
-    {
-        GetComponent<SpriteRenderer>().color = Color.white;
-    }
-
+private void OnMouseDown()
+{
+if(!isClicked)
+{
+GetComponent<SpriteRenderer>().color = Color.red;
+}
+}
+private void OnMouseUp()
+{
+if(!isClicked)
+{
+GetComponent<SpriteRenderer>().color = Color.white;
+isClicked = true;
+}
+}
 }

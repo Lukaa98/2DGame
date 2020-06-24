@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Bird : MonoBehaviour
 {
-    private bool MyFunctionCall;
+    private bool isClicked = false;
     private Vector3 _initialPosition;
     private bool _birdWasLaunched;
     private float _timeSittingAround;
@@ -41,31 +41,26 @@ public class Bird : MonoBehaviour
             string currentSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(currentSceneName);
         }
-        /*
-        if (_birdWasLaunched == false)
-        {
-            Debug.Log("sda");
-            CancelInvoke("OnMouseDrag");
-        }
-        */
-
-
-        if(MyFunctionCall == true)
-        {
-            MyFunctionCall = false;
-            OnMouseDown();
-        }
+       
     }
+
+
+
 
     private void OnMouseDown()  //built in method called when mouse is clicked (this case bird gets red)
     {
+        if(!isClicked)
+        {
         GetComponent<SpriteRenderer>().color = Color.red; //GetComponent is built in method to 
                                                           //acces components inside unity
         GetComponent<LineRenderer>().enabled = true;
+        }
     }
 
     private void OnMouseUp() // //built in method called when mouse is unclicked (this case bird gets white)
     {
+        if(!isClicked)
+        {
         GetComponent<SpriteRenderer>().color = Color.white;
 
         Vector2 dirictionToInitialPosition = _initialPosition - transform.position;
@@ -74,8 +69,8 @@ public class Bird : MonoBehaviour
         _birdWasLaunched = true;
 
         GetComponent<LineRenderer>().enabled = false;
-
-
+        isClicked=true;
+        }
     }
 
     private void OnMouseDrag() //OnMouseDrag is called when the user has clicked on a Collider and is still holding down the mouse.
