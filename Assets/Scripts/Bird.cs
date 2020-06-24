@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class Bird : MonoBehaviour
 {
-
+    private bool MyFunctionCall;
     private Vector3 _initialPosition;
     private bool _birdWasLaunched;
     private float _timeSittingAround;
@@ -41,10 +41,19 @@ public class Bird : MonoBehaviour
             string currentSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(currentSceneName);
         }
+        /*
         if (_birdWasLaunched == false)
         {
             Debug.Log("sda");
             CancelInvoke("OnMouseDrag");
+        }
+        */
+
+
+        if(MyFunctionCall == true)
+        {
+            MyFunctionCall = false;
+            OnMouseDown();
         }
     }
 
