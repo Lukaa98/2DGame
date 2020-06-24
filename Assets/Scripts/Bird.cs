@@ -76,7 +76,10 @@ public class Bird : MonoBehaviour
     private void OnMouseDrag() //OnMouseDrag is called when the user has clicked on a Collider and is still holding down the mouse.
                                 //OnMouseDrag is called every frame while the mouse is down.
     {
+        if(!isClicked)
+        {
         Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector3(newPosition.x, newPosition.y);
+        }
     }
 }
