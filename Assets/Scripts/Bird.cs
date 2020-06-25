@@ -36,7 +36,7 @@ public class Bird : MonoBehaviour
             transform.position.y < -50 ||
             transform.position.x > 65 ||
             transform.position.x < -70 ||
-            _timeSittingAround > 2)
+            _timeSittingAround > 300)
         {
             string currentSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(currentSceneName);
