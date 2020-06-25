@@ -9,19 +9,27 @@ public class PauseMenu : MonoBehaviour
 {
 
    public GameObject Pausemenu;
+   public GameObject ResumeButton;
    public GameObject PauseButton;
+   public GameObject RestartButton;
 
     public void Pause() 
 
     {
-        Pausemenu.SetActive (true);  
+        Pausemenu.SetActive (true); 
+        PauseButton.SetActive (false); 
+        RestartButton.SetActive (false); 
+         
         Time.timeScale = 0;
     }
 
     public void Resume() 
     {
         Pausemenu.SetActive (false);
-        PauseButton.SetActive (true);
+        ResumeButton.SetActive (true);
+        PauseButton.SetActive (true); 
+        RestartButton.SetActive (true); 
+
         Time.timeScale = 1;
     }
 
