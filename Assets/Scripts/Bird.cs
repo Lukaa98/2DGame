@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿
+using System.Collections;
+using System.Collections.Generic;
+
+using System.Linq;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
@@ -21,7 +26,7 @@ public class Bird : MonoBehaviour
     {
         _initialPosition = transform.position;
         sj = GetComponent<SpringJoint2D>();
-        releaseDelay = 1/ (sj.frequency *4);
+        releaseDelay = 1 / (sj.frequency * 4);
 
     }
 
@@ -74,7 +79,7 @@ public class Bird : MonoBehaviour
         _birdWasLaunched = true;
 
         GetComponent<LineRenderer>().enabled = false;
-        StartCoroutine(release());
+        StartCoroutine(Release());
         isClicked=true;
         }
     }
@@ -91,7 +96,7 @@ public class Bird : MonoBehaviour
 
     private IEnumerator Release()
     {
-        yield return new WaitForSecond(deleaseDelay);
-        st.enabled = false;
+        yield return new WaitForSeconds(releaseDelay);
+        sj.enabled = false;
     }
 }
