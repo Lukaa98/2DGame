@@ -8,6 +8,8 @@ public class Bird : MonoBehaviour
     private Vector3 _initialPosition;
     private bool _birdWasLaunched;
     private float _timeSittingAround;
+    private SpringJoint2D sj;
+
    
     [SerializeField] private float _lauchPower = 500;
 
@@ -17,6 +19,7 @@ public class Bird : MonoBehaviour
     private void Awake()
     {
         _initialPosition = transform.position;
+        sj = GetComponent<SpringJoint2D>();
 
     }
 
