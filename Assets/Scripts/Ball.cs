@@ -22,7 +22,11 @@ public class Ball : MonoBehaviour
         slingRb = sj.connectedBody;
         lr = GetComponent<LineRenderer>();
 
+        lr.enabled = false;
+
         releaseDelay = 1/(sj.frequency * 4);
+
+
 
 
     }
@@ -39,7 +43,8 @@ public class Ball : MonoBehaviour
 
     private void DragBall() 
     {
-        SetLineRendererPosition();
+        SetLineRendererPositions();
+
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float distance = Vector2.Distance(mousePosition, slingRb.position);
 
@@ -54,19 +59,19 @@ public class Ball : MonoBehaviour
              }
         }
 
-    private void SetLineRendererPosition()
+    private void SetLineRendererPositions()
     {
         Vector3[] positions = new Vector3[2];
         positions[0] = rb.position;
-        position[1] = hookRb.position;
-        lr.SetPosition(positions);
+        positions[1] = slingRb.position;
+        lr.SetPositions(positions);
     }
 
     private void OnMouseDown()
     {
         isPressed = true;
         rb.isKinematic = true;
-
+        lr.enabled = true;
     }
 
     private void OnMouseUp()
@@ -74,6 +79,7 @@ public class Ball : MonoBehaviour
         isPressed = false;
         rb.isKinematic = false;
         StartCoroutine(Release());
+        lr.enabled = false;
 
 
     }
