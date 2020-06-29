@@ -1,14 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
     private bool isPressed;
+    private bool isClicked = false;
+
 
     private float releaseDelay;
     private float maxDragDistance = 10f;
     private float _timeSittingAround;
+        private bool _birdWasLaunched;
+
 
 
 
@@ -45,6 +50,17 @@ public class Ball : MonoBehaviour
         if (isPressed) {
             DragBall();
         }
+
+    if(_birdWasLaunched && GetComponent<Rigidbody2D>().velocity.magnitude <= 0.1)
+    {
+        _timeSittingAround += Time.deltaTime;
+    }
+    if(_timeSittingAround > 2)
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+            SceneManager.LoadScene(currentSceneName);
+    }
+
         
     }
 
@@ -76,26 +92,42 @@ public class Ball : MonoBehaviour
 
     private void OnMouseDown()
     {
+        if(!isClicked)
+        {
+
         isPressed = true;
         rb.isKinematic = true;
         lr.enabled = true;
+        }
     }
 
     private void OnMouseUp()
     {
+
+        if(!isClicked)
+        {
+
         isPressed = false;
         rb.isKinematic = false;
         StartCoroutine(Release());
         lr.enabled = false;
+        _birdWasLaunched = true;
+                isClicked=true;
+
+        }
+
 
 
     }
 
     private IEnumerator Release()
     {
+        if(!isClicked)
+        {
         yield return new WaitForSeconds(releaseDelay);
         sj.enabled = false;
         tr.enabled = true;
+        }
 
     }
 }
