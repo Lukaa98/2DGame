@@ -5,11 +5,24 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     private bool isPressed;
+
+    private float releaseDelay;
+    private float maxDragDistance = 2f;
+
+
     private Rigidbody2D rb;
+    private SpringJoint2D sj;
+    private Rigidbody2D slingRb;
 
     private void Awake() 
     {
         rb = GetComponent<Rigidbody2D>();
+        sj = GetComponent<SpringJoint2D>();
+        slingRb = sj.connectedBody;
+
+        releaseDelay = 1/(sj.frequency * 4);
+
+
     }
 
 
@@ -26,6 +39,8 @@ public class Ball : MonoBehaviour
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         rb.position = mousePosition;
+        fload distance = Vector2.Distance(mousePosition, slingRb.position);
+
     }
 
     private void OnMouseDown()
@@ -38,8 +53,15 @@ public class Ball : MonoBehaviour
     private void OnMouseUp()
     {
         isPressed = false;
-                rb.isKinematic = true;
+        rb.isKinematic = false;
+        StartCoroutine(Release());
 
 
+    }
+
+    private IEnumerator Release()
+    {
+        yield return new WaitForSeconds(releaseDelay);
+        sj.enabled = false;
     }
 }
