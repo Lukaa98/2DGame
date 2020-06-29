@@ -1,9 +1,4 @@
-﻿
-using System.Collections;
-using System.Collections.Generic;
-
-using System.Linq;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
@@ -13,9 +8,6 @@ public class Bird : MonoBehaviour
     private Vector3 _initialPosition;
     private bool _birdWasLaunched;
     private float _timeSittingAround;
-    private SpringJoint2D sj;
-    private float releaseDelay;
-
    
     [SerializeField] private float _lauchPower = 500;
 
@@ -25,8 +17,6 @@ public class Bird : MonoBehaviour
     private void Awake()
     {
         _initialPosition = transform.position;
-        sj = GetComponent<SpringJoint2D>();
-        releaseDelay = 1 / (sj.frequency * 4);
 
     }
 
@@ -79,7 +69,6 @@ public class Bird : MonoBehaviour
         _birdWasLaunched = true;
 
         GetComponent<LineRenderer>().enabled = false;
-        StartCoroutine(Release());
         isClicked=true;
         }
     }
@@ -92,11 +81,5 @@ public class Bird : MonoBehaviour
         Vector3 newPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         transform.position = new Vector3(newPosition.x, newPosition.y);
         }
-    }
-
-    private IEnumerator Release()
-    {
-        yield return new WaitForSeconds(releaseDelay);
-        sj.enabled = false;
     }
 }
