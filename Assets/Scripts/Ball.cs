@@ -7,13 +7,14 @@ public class Ball : MonoBehaviour
     private bool isPressed;
 
     private float releaseDelay;
-    private float maxDragDistance = 10f;
+    private float maxDragDistance = 2.5f;
 
 
     private Rigidbody2D rb;
     private SpringJoint2D sj;
     private Rigidbody2D slingRb;
     private LineRenderer lr;
+    private TrailRenderer tr;
 
     private void Awake() 
     {
@@ -21,8 +22,12 @@ public class Ball : MonoBehaviour
         sj = GetComponent<SpringJoint2D>();
         slingRb = sj.connectedBody;
         lr = GetComponent<LineRenderer>();
+        tr = GetComponent<TrailRenderer>();
+
 
         lr.enabled = false;
+        tr.enabled = false;
+
 
         releaseDelay = 1/(sj.frequency * 4);
 
@@ -88,5 +93,7 @@ public class Ball : MonoBehaviour
     {
         yield return new WaitForSeconds(releaseDelay);
         sj.enabled = false;
+        tr.enabled = true;
+
     }
 }
