@@ -7,7 +7,9 @@ public class Ball : MonoBehaviour
     private bool isPressed;
 
     private float releaseDelay;
-    private float maxDragDistance = 2.5f;
+    private float maxDragDistance = 10f;
+    private float _timeSittingAround;
+
 
 
     private Rigidbody2D rb;
