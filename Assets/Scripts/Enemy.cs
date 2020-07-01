@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
@@ -28,6 +29,12 @@ public class Enemy : MonoBehaviour
            {
                Destroy(gameObject);
            }
+
+        if(enemy == null)
+        {
+              SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+        }
       }
 
 }
