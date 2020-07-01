@@ -7,6 +7,7 @@ public class Enemy : MonoBehaviour
 {
 
     public int EnemysToKill = 2;
+    public GameObject levelwon;
     private void OnCollisionEnter2D(Collision2D collision) //Sent when an incoming collider makes contact 
                                                            //with this object's collider (2D physics only).
                                                            //the Code between braces will be executed when 
@@ -39,9 +40,17 @@ public class Enemy : MonoBehaviour
 
            }
 
+
            if(Inventory.Reference.KilledEnemys >= EnemysToKill)
            {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+               Debug.Log("level won");
+
+            
+
+             levelwon.SetActive(true);
+            
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
            }
 
