@@ -48,6 +48,13 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 
+      public void levelwon()
+    {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+    
+
  
 
 
