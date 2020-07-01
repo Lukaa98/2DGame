@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 109619890}
   - component: {fileID: 109619889}
   - component: {fileID: 109619897}
+  - component: {fileID: 109619898}
   m_Layer: 0
   m_Name: ball
   m_TagString: Untagged
@@ -559,7 +560,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 109619888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.7, y: -15.8, z: 0}
+  m_LocalPosition: {x: 5.5, y: -29.7, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -682,6 +683,19 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_Autodestruct: 0
   m_Emitting: 1
+--- !u!114 &109619898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 109619888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba7069ef0994a14bacd7edb6078eb2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KilledEnemys: 0
 --- !u!1 &249398737
 GameObject:
   m_ObjectHideFlags: 0
@@ -845,6 +859,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ce7c2346caf914ab488ebf236a833c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemysToKill: 2
 --- !u!1 &295156660
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,7 +920,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295156660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.625001, y: -6.8500004, z: -18}
+  m_LocalPosition: {x: -8.574999, y: -13.8, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1281790141}
@@ -1130,7 +1145,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 16.464527
+  orthographic size: 21.125002
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1154,7 +1169,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -9.625001, y: -6.8500004, z: -18}
+  m_LocalPosition: {x: -8.574999, y: -13.8, z: -18}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1527,6 +1542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ce7c2346caf914ab488ebf236a833c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  EnemysToKill: 2
 --- !u!4 &1110014345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 46238302181509752, guid: 20fac632088e79940a72f850dd101197,
@@ -1656,6 +1672,7 @@ GameObject:
   - component: {fileID: 1144234839}
   - component: {fileID: 1144234838}
   - component: {fileID: 1144234837}
+  - component: {fileID: 1144234841}
   m_Layer: 0
   m_Name: Blue Bird
   m_TagString: Untagged
@@ -2102,6 +2119,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1144234841
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1144234833}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dba7069ef0994a14bacd7edb6078eb2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  KilledEnemys: 0
 --- !u!1 &1281790140
 GameObject:
   m_ObjectHideFlags: 3
@@ -2918,7 +2948,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1398638281}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -35.76, y: -16.1, z: 0}
+  m_LocalPosition: {x: 5.5, y: -30, z: 0}
   m_LocalScale: {x: 10, y: 10, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2939,12 +2969,12 @@ PrefabInstance:
     - target: {fileID: 46238302181509752, guid: 20fac632088e79940a72f850dd101197,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -8.6125
+      value: 1.6875
       objectReference: {fileID: 0}
     - target: {fileID: 46238302181509752, guid: 20fac632088e79940a72f850dd101197,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.4775
+      value: -8.9525
       objectReference: {fileID: 0}
     - target: {fileID: 46238302181509752, guid: 20fac632088e79940a72f850dd101197,
         type: 3}
