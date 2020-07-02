@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class Enemy : MonoBehaviour
 {
 
-    public int EnemysToKill = 2;
+    public float EnemysToKill = 2f;
     public GameObject levelwon;
     private void OnCollisionEnter2D(Collision2D collision) //Sent when an incoming collider makes contact 
                                                            //with this object's collider (2D physics only).
