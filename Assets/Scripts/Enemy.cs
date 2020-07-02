@@ -16,8 +16,9 @@ public class Enemy : MonoBehaviour
         Bird bird = collision.collider.GetComponent<Bird>();
         if (bird != null) //null means it does not exists
         {
-            Inventory.Reference.KilledEnemys += 1;
             Destroy(gameObject);
+            Inventory.Reference.KilledEnemys += 1;
+
            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
           //  return;//if we hit object and in this case (mosnter) is destroyed, a return fucntion will end game
@@ -34,9 +35,10 @@ public class Enemy : MonoBehaviour
         }
            if (collision.contacts[0].normal.y < -0.5)  //if we hit from the top
            {
-             Inventory.Reference.KilledEnemys += 1;
 
                Destroy(gameObject);
+               Inventory.Reference.KilledEnemys += 1;
+
 
            }
 
