@@ -7,6 +7,8 @@ public class Ball : MonoBehaviour
 {
     private bool isPressed;
     private bool isClicked = false;
+    public GameObject levelLost;
+
 
 
     private float releaseDelay;
@@ -60,7 +62,7 @@ public class Ball : MonoBehaviour
       
       //  string currentSceneName = SceneManager.GetActiveScene().name;
         //    SceneManager.LoadScene(currentSceneName);
-                     levelwon.SetActive(true);
+                     levelLost.SetActive(true);
 
     }
 
