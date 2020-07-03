@@ -57,8 +57,11 @@ public class Ball : MonoBehaviour
     }
     if(_timeSittingAround > 2)
     {
-        string currentSceneName = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(currentSceneName);
+      
+      //  string currentSceneName = SceneManager.GetActiveScene().name;
+        //    SceneManager.LoadScene(currentSceneName);
+                     levelwon.SetActive(true);
+
     }
 
         
