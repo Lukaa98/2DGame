@@ -26,6 +26,19 @@ public class Enemy : MonoBehaviour
 
         }
 
+         Ball ball = collision.collider.GetComponent<Ball>();
+        if (ball != null) //null means it does not exists
+        {
+            Destroy(gameObject);
+            Inventory.Reference.KilledEnemys += 1;
+
+           //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+          //  return;//if we hit object and in this case (mosnter) is destroyed, a return fucntion will end game
+                    //insead of going to the next method which checks if box killed monster or not. 
+
+        }
+
         Enemy enemy = collision.collider.GetComponent<Enemy>();//if collision was not from the bird and maybe 
                                                                // it was from the box and it hit from the top
                                                                //then end game as well
