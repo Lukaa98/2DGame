@@ -13,6 +13,9 @@ public class PauseMenu : MonoBehaviour
    public GameObject PauseButton;
    public GameObject RestartButton;
 
+   //public GameObject LevelWonMenu;
+   //public GameObject LevelLostMenu;
+
     public void Pause() 
 
     {
@@ -48,7 +51,7 @@ public class PauseMenu : MonoBehaviour
         Application.Quit();
     }
 
-      public void levelwon()
+      public void NextLevel()
     {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
