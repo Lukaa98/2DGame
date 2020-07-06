@@ -5,14 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class Enemy : MonoBehaviour
 {
+   public GameObject levelLost;
+    public GameObject NextLevel;
+    private float _timeSittingAround;
+
+
 
     public float EnemysToKill = 2f;
-    public GameObject levelwon;
     private void OnCollisionEnter2D(Collision2D collision) //Sent when an incoming collider makes contact 
                                                            //with this object's collider (2D physics only).
                                                            //the Code between braces will be executed when 
                                                            //two objects collides with each other
       { 
+        
         Bird bird = collision.collider.GetComponent<Bird>();
         if (bird != null) //null means it does not exists
         {
@@ -25,18 +30,13 @@ public class Enemy : MonoBehaviour
                     //insead of going to the next method which checks if box killed monster or not. 
 
         }
+    
 
          Ball ball = collision.collider.GetComponent<Ball>();
         if (ball != null) //null means it does not exists
         {
             Destroy(gameObject);
-            Inventory.Reference.KilledEnemys += 1;
-
-           //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
-          //  return;//if we hit object and in this case (mosnter) is destroyed, a return fucntion will end game
-                    //insead of going to the next method which checks if box killed monster or not. 
-
+            Inventory.Reference.KilledEnemys +=1;
         }
 
         Enemy enemy = collision.collider.GetComponent<Enemy>();//if collision was not from the bird and maybe 
@@ -56,18 +56,36 @@ public class Enemy : MonoBehaviour
            }
 
 
-           if(Inventory.Reference.KilledEnemys >= EnemysToKill)
+           if(Inventory.Reference.KilledEnemys > EnemysToKill)
            {
 
                Debug.Log("level won");
 
             
 
-             levelwon.SetActive(true);
+             NextLevel.SetActive(true);
+             levelLost.SetActive(false);
+
+
             
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
 
            }
+
+         //  if(Inventory.Reference.KilledEnemys < EnemysToKill)
+           //{
+
+             //  Debug.Log("level lost");
+
+            
+
+             //levelLost.SetActive(false);
+
+
+            
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+         //  }
 
         
       }
