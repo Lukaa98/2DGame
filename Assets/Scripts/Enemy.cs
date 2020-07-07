@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Enemy : MonoBehaviour
 {
+  public Ball ballobj = null;
+      public GameObject levelLost;
+
+
     public float EnemysToKill = 2f;
     private float killedago;
 
@@ -53,7 +57,8 @@ public class Enemy : MonoBehaviour
 
    // void Update()
 
-           if(Inventory.Reference.KilledEnemys >= EnemysToKill)
+           
+             if(Inventory.Reference.KilledEnemys >= EnemysToKill && ballobj != null)
            { 
              //killedago += Time.deltaTime;
           
@@ -61,10 +66,26 @@ public class Enemy : MonoBehaviour
                Debug.Log("level won");
             
              levelwon.SetActive(true);
+                    levelLost.SetActive(false);
+
             
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
            
            }
+
+           if(Inventory.Reference.KilledEnemys != EnemysToKill && ballobj != null)
+           { 
+             //killedago += Time.deltaTime;
+          
+           
+               Debug.Log("level won");
+            
+       levelLost.SetActive(true);
+            
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+           
+           }
+           
 
       }
 }
