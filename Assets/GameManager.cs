@@ -5,10 +5,22 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
 
-    
+    public GameObject levelwon;
+    public GameObject levelLost;
 
-public void EndGame()
+public void LevelWon()
 {
-    Debug.Log("game over");
+                 levelwon.SetActive(true);
+                Debug.Log("game Won");
+
+    
+}
+
+public void LevelLost()
+{
+             levelLost.SetActive(true);
+             Debug.Log("level los12t ");
+
+
 }
 }
