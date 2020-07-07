@@ -7,14 +7,10 @@ public class Ball : MonoBehaviour
 {
     private bool isPressed;
     private bool isClicked = false;
-    //public GameObject levelLost;
-
-
-
     private float releaseDelay;
     private float maxDragDistance = 100f;
     private float _timeSittingAround;
-        private bool _birdWasLaunched;
+    private bool _birdWasLaunched;
 
 
 
@@ -61,15 +57,6 @@ public class Ball : MonoBehaviour
     {
          FindObjectOfType<GameManager>().LevelLost();
 
-
-
-       //levelLost.SetActive(true);
-                     // levelLost.SetActive(false);
-
-
-      
-       // string currentSceneName = SceneManager.GetActiveScene().name;
-         //   SceneManager.LoadScene(currentSceneName);
 
     }
 
