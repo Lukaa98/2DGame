@@ -12,7 +12,7 @@ public class Ball : MonoBehaviour
 
 
     private float releaseDelay;
-    private float maxDragDistance = 100f;
+    private float maxDragDistance = 15f;
     private float _timeSittingAround;
         private bool _birdWasLaunched;
 
