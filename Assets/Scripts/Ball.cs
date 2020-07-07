@@ -12,7 +12,7 @@ public class Ball : MonoBehaviour
 
 
     private float releaseDelay;
-    private float maxDragDistance = 15f;
+    private float maxDragDistance = 100f;
     private float _timeSittingAround;
         private bool _birdWasLaunched;
 
@@ -55,12 +55,14 @@ public class Ball : MonoBehaviour
 
     if(_birdWasLaunched && GetComponent<Rigidbody2D>().velocity.magnitude <= 0.1)
     {
-        _timeSittingAround += Time.deltaTime;
+             _timeSittingAround += Time.deltaTime;
     }
-    if(_timeSittingAround > 2)
+    if(_timeSittingAround > 1)
     {
+          Debug.Log("level lost ");
 
-         levelLost.SetActive(true);
+
+       // levelLost.SetActive(true);
                      // levelLost.SetActive(false);
 
 
