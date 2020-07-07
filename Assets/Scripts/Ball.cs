@@ -47,7 +47,7 @@ public class Ball : MonoBehaviour
 
 
     // Update is called once per frame
-    void Update()
+    public void Update()
     {
         if (isPressed) {
             DragBall();
@@ -62,7 +62,7 @@ public class Ball : MonoBehaviour
           Debug.Log("level lost ");
 
 
-       // levelLost.SetActive(true);
+       //levelLost.SetActive(true);
                      // levelLost.SetActive(false);
 
 
