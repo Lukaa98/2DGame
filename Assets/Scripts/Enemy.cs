@@ -63,10 +63,11 @@ public class Enemy : MonoBehaviour
              //killedago += Time.deltaTime;
           
            
-               Debug.Log("level won");
+               Debug.Log("level won123");
             
              levelwon.SetActive(true);
-                    levelLost.SetActive(false);
+                            FindObjectOfType<GameManager>().EndGame();
+
 
             
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
@@ -78,9 +79,9 @@ public class Enemy : MonoBehaviour
              //killedago += Time.deltaTime;
           
            
-               Debug.Log("level won");
+ //              Debug.Log("level won");
             
-       levelLost.SetActive(true);
+      // levelLost.SetActive(true);
             
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
            
