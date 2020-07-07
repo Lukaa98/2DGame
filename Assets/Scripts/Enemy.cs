@@ -72,6 +72,9 @@ public class Enemy : MonoBehaviour
 
            }
 
+         Ball ball = collision.collider.GetComponent<Ball>();
+
+
          //  if(Inventory.Reference.KilledEnemys < EnemysToKill)
            //{
 

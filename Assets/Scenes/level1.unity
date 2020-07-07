@@ -795,7 +795,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 249398737}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.45, y: 1.6, z: 0}
+  m_LocalPosition: {x: 17.1, y: -27.3, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -860,8 +860,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ce7c2346caf914ab488ebf236a833c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelLost: {fileID: 1031863271}
+  NextLevel: {fileID: 994773672}
   EnemysToKill: 1
-  levelwon: {fileID: 994773672}
 --- !u!1 &267244762
 GameObject:
   m_ObjectHideFlags: 0
@@ -1051,7 +1052,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295156660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.575, y: -6.5000005, z: -18}
+  m_LocalPosition: {x: -8.250001, y: -12.700001, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1281790141}
@@ -1182,7 +1183,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 390846871}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.59, y: -8.25, z: 0}
+  m_LocalPosition: {x: 22.449999, y: -30.6, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1276,7 +1277,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 15.826014
+  orthographic size: 19.749998
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1300,7 +1301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.575, y: -6.5000005, z: -18}
+  m_LocalPosition: {x: -8.250001, y: -12.700001, z: -18}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1802,7 +1803,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036415957}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.5, y: -12.51, z: 0}
+  m_LocalPosition: {x: 22.15, y: -25.5, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1906,7 +1907,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1103039328}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.4, y: -2.81, z: 0}
+  m_LocalPosition: {x: 10, y: -27.5, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1971,8 +1972,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ce7c2346caf914ab488ebf236a833c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelLost: {fileID: 1031863271}
+  NextLevel: {fileID: 994773672}
   EnemysToKill: 1
-  levelwon: {fileID: 994773672}
 --- !u!4 &1110014345 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 46238302181509752, guid: 20fac632088e79940a72f850dd101197,
@@ -2956,7 +2958,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1347083617}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.45, y: -3.24, z: 0}
+  m_LocalPosition: {x: 26.15, y: -14.800001, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3275,7 +3277,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1390655126}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 16.349998, y: -7.9, z: 0}
+  m_LocalPosition: {x: 26.15, y: -21.300001, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3528,12 +3530,12 @@ PrefabInstance:
     - target: {fileID: 46238302181509752, guid: 20fac632088e79940a72f850dd101197,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6.4875
+      value: -6.675
       objectReference: {fileID: 0}
     - target: {fileID: 46238302181509752, guid: 20fac632088e79940a72f850dd101197,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -5.3025002
+      value: -18.7
       objectReference: {fileID: 0}
     - target: {fileID: 46238302181509752, guid: 20fac632088e79940a72f850dd101197,
         type: 3}
