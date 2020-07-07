@@ -860,6 +860,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ce7c2346caf914ab488ebf236a833c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballobj: {fileID: 109619890}
+  levelLost: {fileID: 1031863271}
   EnemysToKill: 2
   levelwon: {fileID: 994773672}
 --- !u!1 &267244762
@@ -1051,7 +1053,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 295156660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.249999, y: -12.7, z: -18}
+  m_LocalPosition: {x: -8.249999, y: -12.700001, z: -18}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1281790141}
@@ -1276,7 +1278,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 19.75
+  orthographic size: 19.749998
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1300,7 +1302,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.249999, y: -12.7, z: -18}
+  m_LocalPosition: {x: -8.249999, y: -12.700001, z: -18}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1658,7 +1660,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -49, y: 20}
+  m_AnchoredPosition: {x: 448, y: 74}
   m_SizeDelta: {x: -1246.8384, y: -99.654785}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1031863273
@@ -1991,6 +1993,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4ce7c2346caf914ab488ebf236a833c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ballobj: {fileID: 109619890}
+  levelLost: {fileID: 1031863271}
   EnemysToKill: 2
   levelwon: {fileID: 994773672}
 --- !u!4 &1110014345 stripped
