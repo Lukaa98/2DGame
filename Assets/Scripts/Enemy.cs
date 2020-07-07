@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     public float EnemysToKill = 2f;
     private float killedago;
 
-    public GameObject levelwon;
+    //public GameObject levelwon;
     private void OnCollisionEnter2D(Collision2D collision) //Sent when an incoming collider makes contact 
                                                            //with this object's collider (2D physics only).
                                                            //the Code between braces will be executed when 
@@ -53,40 +53,12 @@ public class Enemy : MonoBehaviour
                Destroy(gameObject);
                Inventory.Reference.KilledEnemys += 1;
            }
-
-
-   // void Update()
-
            
              if(Inventory.Reference.KilledEnemys >= EnemysToKill && ballobj != null)
            { 
-             //killedago += Time.deltaTime;
           
-           
-               Debug.Log("level won123");
-            
-             levelwon.SetActive(true);
-                            FindObjectOfType<GameManager>().EndGame();
-
-
-            
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-           
+                      FindObjectOfType<GameManager>().LevelWon();
            }
-
-           if(Inventory.Reference.KilledEnemys != EnemysToKill && ballobj != null)
-           { 
-             //killedago += Time.deltaTime;
-          
-           
- //              Debug.Log("level won");
-            
-      // levelLost.SetActive(true);
-            
-            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-           
-           }
-           
 
       }
 }
