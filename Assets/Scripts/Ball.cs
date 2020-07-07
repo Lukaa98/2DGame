@@ -7,7 +7,7 @@ public class Ball : MonoBehaviour
 {
     private bool isPressed;
     private bool isClicked = false;
-    public GameObject levelLost;
+    //public GameObject levelLost;
 
 
 
@@ -59,7 +59,8 @@ public class Ball : MonoBehaviour
     }
     if(_timeSittingAround > 1)
     {
-          Debug.Log("level lost ");
+         FindObjectOfType<GameManager>().LevelLost();
+
 
 
        //levelLost.SetActive(true);
