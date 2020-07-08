@@ -8,26 +8,29 @@ public class GameManager : MonoBehaviour
     public GameObject levelwon;
     public GameObject levelLost;
 
-    bool won = false;
+bool controlBool = false;
+
     
+
 public void LevelWon()
+
 {
-    if(won ==false)
-    {
-    won = true;
 
-               levelwon.SetActive(true);
-                Debug.Log("game Won");
-    }
+controlBool=true;
+levelwon.SetActive(true);
+Debug.Log("game Won");
 
-    
 }
 
 public void LevelLost()
+
 {
-             levelLost.SetActive(true);
-             Debug.Log("level los12t ");
 
+if(controlBool == false){
 
+levelLost.SetActive(true);
+Debug.Log("level los12t ");
+
+}
 }
 }
