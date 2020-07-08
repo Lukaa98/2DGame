@@ -8,10 +8,17 @@ public class GameManager : MonoBehaviour
     public GameObject levelwon;
     public GameObject levelLost;
 
+    bool won = false;
+    
 public void LevelWon()
 {
-                 levelwon.SetActive(true);
+    if(won ==false)
+    {
+    won = true;
+
+               levelwon.SetActive(true);
                 Debug.Log("game Won");
+    }
 
     
 }
