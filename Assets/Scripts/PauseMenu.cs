@@ -38,12 +38,18 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
+        PauseButton.SetActive (false); 
+        RestartButton.SetActive (false);
         Application.LoadLevel(Application.loadedLevel);
+                Time.timeScale = 1;
+
     }
 
      public void MainMenu(int SceneIndex)
     {
         SceneManager.LoadScene(SceneIndex);
+                Time.timeScale = 1;
+
 
     }
     public void Quit()
@@ -53,7 +59,14 @@ public class PauseMenu : MonoBehaviour
 
       public void NextLevel()
     {
+                Pausemenu.SetActive (false);
+
+        PauseButton.SetActive (false); 
+        RestartButton.SetActive (false);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+
+                    Time.timeScale = 1;
+
     }
 
     
