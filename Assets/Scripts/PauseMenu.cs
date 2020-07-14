@@ -23,7 +23,7 @@ public class PauseMenu : MonoBehaviour
         PauseButton.SetActive (false); 
         RestartButton.SetActive (false); 
          
-        Time.timeScale = 1;
+        Time.timeScale = 0;
     }
 
     public void Resume() 
