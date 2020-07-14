@@ -18,7 +18,7 @@ public class Enemy : MonoBehaviour
        
 
         Ball ball = collision.collider.GetComponent<Ball>();
-               Enemy enemy = collision.collider.GetComponent<Enemy>();//if collision was not from the bird and maybe 
+        //Enemy enemy = collision.collider.GetComponent<Enemy>();//if collision was not from the bird and maybe 
 
         if (ball != null || collision.contacts[0].normal.y < -0.5) //null means it does not exists
         {
@@ -26,19 +26,6 @@ public class Enemy : MonoBehaviour
             Inventory.Reference.KilledEnemys += 1;
         }
 
-      // Enemy enemy = collision.collider.GetComponent<Enemy>();//if collision was not from the bird and maybe 
-                                                               // it was from the box and it hit from the top
-
-      //if  (enemy != null)
-      //{
-       // return;
-      //}        
-        
-         //if (collision.contacts[0].normal.y < -0.5)  //if we hit from the top
-          //{
-           //   Destroy(gameObject);
-             //  Inventory.Reference.KilledEnemys += 1;
-           //}                                                    //then end game as well
            
              if(Inventory.Reference.KilledEnemys >= EnemysToKill && ballobj != null)
            { 
