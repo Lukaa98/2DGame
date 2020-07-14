@@ -29,7 +29,6 @@ public class PauseMenu : MonoBehaviour
     public void Resume() 
     {
         Pausemenu.SetActive (false);
-        ResumeButton.SetActive (true);
         PauseButton.SetActive (true); 
         RestartButton.SetActive (true); 
 
@@ -59,8 +58,8 @@ public class PauseMenu : MonoBehaviour
 
       public void NextLevel()
     {
-                Pausemenu.SetActive (false);
-
+        NextLevel.SetActive(true);
+        Pausemenu.SetActive (false);
         PauseButton.SetActive (false); 
         RestartButton.SetActive (false);
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
