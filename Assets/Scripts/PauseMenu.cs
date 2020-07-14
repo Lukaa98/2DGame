@@ -13,11 +13,8 @@ public class PauseMenu : MonoBehaviour
    public GameObject PauseButton;
    public GameObject RestartButton;
 
-   //public GameObject LevelWonMenu;
-   //public GameObject LevelLostMenu;
 
     public void Pause() 
-
     {
         Pausemenu.SetActive (true); 
         PauseButton.SetActive (false); 
@@ -37,40 +34,28 @@ public class PauseMenu : MonoBehaviour
 
     public void Restart()
     {
-        PauseButton.SetActive (false); 
-        RestartButton.SetActive (false);
         Application.LoadLevel(Application.loadedLevel);
-                Time.timeScale = 1;
-
+        
+        Time.timeScale = 1;
     }
 
-     public void MainMenu(int SceneIndex)
+    public void MainMenu(int SceneIndex)
     {
         SceneManager.LoadScene(SceneIndex);
-                Time.timeScale = 1;
-
-
+        
+        Time.timeScale = 1;
     }
     public void Quit()
     {
         Application.Quit();
     }
 
-      public void NextLevel()
+    public void NextLevel()
     {
-        NextLevel.SetActive(true);
-        Pausemenu.SetActive (false);
-        PauseButton.SetActive (false); 
-        RestartButton.SetActive (false);
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-
-                    Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+       
+        Time.timeScale = 1;
 
     }
-
-    
-
- 
-
 
 }
