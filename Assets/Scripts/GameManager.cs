@@ -22,6 +22,7 @@ public void LevelWon()
     controlBool=true;
     levelwon.SetActive(true);
     Debug.Log("game Won");
+    FindObjectType<AudioManager>().Play("Rock win");
 
  }
 
