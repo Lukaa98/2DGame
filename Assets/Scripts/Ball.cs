@@ -97,6 +97,8 @@ public class Ball : MonoBehaviour
         isPressed = true;
         rb.isKinematic = true;
         lr.enabled = true;
+                FindObjectOfType<AudioManager>().Play("Stretch");
+
         }
     }
 
@@ -111,7 +113,9 @@ public class Ball : MonoBehaviour
         StartCoroutine(Release());
         lr.enabled = false;
         _birdWasLaunched = true;
-                isClicked=true;
+        isClicked=true;
+        FindObjectOfType<AudioManager>().Play("Fly");
+
 
         }
 
