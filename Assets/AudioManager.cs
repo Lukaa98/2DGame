@@ -32,10 +32,10 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-        void Start ()
-        {
-            Play("Theme");
-        }
+        //void Start ()
+        //{
+          //  Play("Theme");
+        //}
         
     
 
