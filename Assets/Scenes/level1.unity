@@ -326,8 +326,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 51c471696c4d8eb4fb32d4cdd9cc61c8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.201
-  m_Pitch: 0.99
+  m_Volume: 0.01
+  m_Pitch: 0.74
   Loop: 1
   Mute: 0
   Spatialize: 0
@@ -565,7 +565,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 25.675001
+  orthographic size: 25.68284
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -701,8 +701,23 @@ MonoBehaviour:
   sounds:
   - name: Rock win
     clip: {fileID: 8300000, guid: 04354cdc4ac9811469fb957de228e0f9, type: 3}
-    volume: 0
-    pitch: 0
+    volume: 0.183
+    pitch: 1
+    source: {fileID: 0}
+  - name: Fly
+    clip: {fileID: 8300000, guid: 89b7635ff91004f45a3f4f081efd3e86, type: 3}
+    volume: 0.523
+    pitch: 1
+    source: {fileID: 0}
+  - name: Stretch
+    clip: {fileID: 8300000, guid: b0ed6005844fbb449ae4b3b82018be64, type: 3}
+    volume: 0.485
+    pitch: 1.04
+    source: {fileID: 0}
+  - name: Theme
+    clip: {fileID: 8300000, guid: 80dcc15525bad0a4b8c6419cac4b1150, type: 3}
+    volume: 0.632
+    pitch: 1.04
     source: {fileID: 0}
 --- !u!4 &729760494
 Transform:
@@ -969,7 +984,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1036415957}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.6, y: -5.6, z: 0}
+  m_LocalPosition: {x: 19.9, y: -5.9, z: 0}
   m_LocalScale: {x: 0.393991, y: 0.91949123, z: 0.1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1154,8 +1169,8 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 423017d00c638b84eb736467289f6363, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.207
-  m_Pitch: 1
+  m_Volume: 0.01
+  m_Pitch: 0.53
   Loop: 1
   Mute: 0
   Spatialize: 0
