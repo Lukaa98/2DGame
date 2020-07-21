@@ -30,6 +30,8 @@ public class PauseMenu : MonoBehaviour
         Pausemenu.SetActive (false);
         PauseButton.SetActive (true); 
         RestartButton.SetActive (true); 
+        FindObjectOfType<AudioManager>().Play("Clicking Button");
+
 
         Time.timeScale = 1;
     }
@@ -37,13 +39,16 @@ public class PauseMenu : MonoBehaviour
     public void Restart()
     {
         Application.LoadLevel(Application.loadedLevel);
-        
+        FindObjectOfType<AudioManager>().Play("Clicking Button");
+
         Time.timeScale = 1;
     }
 
     public void MainMenu(int SceneIndex)
     {
         SceneManager.LoadScene(SceneIndex);
+        FindObjectOfType<AudioManager>().Play("Clicking Button");
+
         
         Time.timeScale = 1;
     }
@@ -55,6 +60,8 @@ public class PauseMenu : MonoBehaviour
     public void NextLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        FindObjectOfType<AudioManager>().Play("Clicking Button");
+    
        
         Time.timeScale = 1;
 
