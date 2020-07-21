@@ -19,6 +19,8 @@ public class PauseMenu : MonoBehaviour
         Pausemenu.SetActive (true); 
         PauseButton.SetActive (false); 
         RestartButton.SetActive (false); 
+        FindObjectOfType<AudioManager>().Play("Clicking Button");
+
          
         Time.timeScale = 0;
     }
