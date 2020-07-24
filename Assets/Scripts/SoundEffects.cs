@@ -8,11 +8,11 @@ public class SoundEffects : MonoBehaviour
    public AudioSource deathSong; 
    
    public bool levelSong = true;
-      public bool levelSong = false;
+   public bool DeathSong = false;
 
 
 
-    public void levelMusic()
+    public void LevelMusic()
     {
         if(levelMusic.isPlaying)
         levelSong = false;
