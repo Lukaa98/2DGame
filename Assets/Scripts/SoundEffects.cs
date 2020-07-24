@@ -11,12 +11,20 @@ public class SoundEffects : MonoBehaviour
    public bool DeathSong = false;
 
 
-
     public void LevelMusic()
+    {
+        levelSong = true;
+        DeathSong = false;
+        levelMusic.Play();
+    }
+
+    public void DeathSound()
     {
         if(levelMusic.isPlaying)
         levelSong = false;
         {
+            levelMusic.Stop();
+        }
             if(!deathSong.isPlaying && DeathSong == false)
             {
                 deathSong.Play();
@@ -25,4 +33,4 @@ public class SoundEffects : MonoBehaviour
         }
     }
 
-}
+
