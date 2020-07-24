@@ -6,16 +6,14 @@ public class SoundEffects : MonoBehaviour
 {
    public AudioSource levelMusic;
    public AudioSource deathSong; 
-      public AudioSource wonSong; 
+   public AudioSource wonSong; 
 
    
    public bool levelSong = true;
    public bool DeathSong = false;
-      public bool WonSong = false;
+   public bool WonSong = false;
 
    
-
-
     public void LevelMusic()
     {
         levelSong = true;
