@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Ball : MonoBehaviour
 {
+
     private bool isPressed;
     private bool isClicked = false;
     private float releaseDelay;
@@ -23,6 +24,8 @@ public class Ball : MonoBehaviour
 
     private void Awake() 
     {
+                              //  FindObjectOfType<AudioManager>().Play("Theme");
+
         rb = GetComponent<Rigidbody2D>();
         sj = GetComponent<SpringJoint2D>();
         slingRb = sj.connectedBody;
@@ -133,4 +136,5 @@ public class Ball : MonoBehaviour
         }
 
     }
+
 }
