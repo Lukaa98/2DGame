@@ -35,7 +35,7 @@ public void LevelLost()
     RestartButton.SetActive (false); 
     levelLost.SetActive(true);
     Debug.Log("level los12t ");
-        FindObjectOfType<AudioManager>().Play("Enemy");
+        FindObjectOfType<SoundEffects>().DeathSound();
 
                            }
  }
