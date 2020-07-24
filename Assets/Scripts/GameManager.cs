@@ -23,6 +23,7 @@ public void LevelWon()
     levelwon.SetActive(true);
     Debug.Log("game Won");
     FindObjectOfType<AudioManager>().Play("Rock win");
+    FindObjectOfType<SoundEffects>().DeathSound();
 
  }
 
@@ -35,7 +36,9 @@ public void LevelLost()
     RestartButton.SetActive (false); 
     levelLost.SetActive(true);
     Debug.Log("level los12t ");
-        FindObjectOfType<SoundEffects>().DeathSound();
+//    FindObjectOfType<SoundEffects>().DeathSound();
+ FindObjectOfType<AudioManager>().Play("Level Lost");
+    FindObjectOfType<SoundEffects>().DeathSound();
 
                            }
  }
