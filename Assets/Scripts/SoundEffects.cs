@@ -27,8 +27,9 @@ public class SoundEffects : MonoBehaviour
         }
             if(!deathSong.isPlaying && DeathSong == false)
             {
-                deathSong.Play();
                 DeathSong = true;
+                                deathSong.Play();
+
             }
         }
     }
