@@ -148,11 +148,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 80dcc15525bad0a4b8c6419cac4b1150, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.244
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -633,7 +633,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca569d2e909fe304a96ce156b1f488ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelMusic: {fileID: 0}
+  levelMusic: {fileID: 249398744}
   deathSong: {fileID: 1563288289}
   levelSong: 1
   DeathSong: 0
@@ -849,102 +849,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 8411563398332090253}
   m_PrefabAsset: {fileID: 0}
---- !u!82 &994773677
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 994773672}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 250
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &1031863271 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8411563397988220010, guid: abfb318726b914648a16fb7acea83b96,
@@ -3231,7 +3135,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: dadc1fad7aa60a4469913ba72627d39a, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 6e90b02c1c3700e408fccf3806a58701, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 0.319
   m_Pitch: 1
@@ -3673,6 +3577,66 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675374330218717550, guid: 087d77703c9d1d44ba232713296d4f70,
+        type: 3}
+      propertyPath: sounds.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675374330218717550, guid: 087d77703c9d1d44ba232713296d4f70,
+        type: 3}
+      propertyPath: sounds.Array.data[5].name
+      value: Level Lost
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675374330218717550, guid: 087d77703c9d1d44ba232713296d4f70,
+        type: 3}
+      propertyPath: sounds.Array.data[5].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: a174fe76b26cc4442b63c1238bd731bc, type: 3}
+    - target: {fileID: 1675374330218717550, guid: 087d77703c9d1d44ba232713296d4f70,
+        type: 3}
+      propertyPath: sounds.Array.data[5].volume
+      value: 0.141
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675374330218717550, guid: 087d77703c9d1d44ba232713296d4f70,
+        type: 3}
+      propertyPath: sounds.Array.data[5].pitch
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675374330218717550, guid: 087d77703c9d1d44ba232713296d4f70,
+        type: 3}
+      propertyPath: sounds.Array.data[3].name
+      value: Clicking Button
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675374330218717550, guid: 087d77703c9d1d44ba232713296d4f70,
+        type: 3}
+      propertyPath: sounds.Array.data[3].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: f53455a2a52858f4cad7ce954873ba99, type: 3}
+    - target: {fileID: 1675374330218717550, guid: 087d77703c9d1d44ba232713296d4f70,
+        type: 3}
+      propertyPath: sounds.Array.data[3].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675374330218717550, guid: 087d77703c9d1d44ba232713296d4f70,
+        type: 3}
+      propertyPath: sounds.Array.data[4].name
+      value: LevelLost
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675374330218717550, guid: 087d77703c9d1d44ba232713296d4f70,
+        type: 3}
+      propertyPath: sounds.Array.data[4].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 6e90b02c1c3700e408fccf3806a58701, type: 3}
+    - target: {fileID: 1675374330218717550, guid: 087d77703c9d1d44ba232713296d4f70,
+        type: 3}
+      propertyPath: sounds.Array.data[2].loop
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675374330218717550, guid: 087d77703c9d1d44ba232713296d4f70,
+        type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.452
       objectReference: {fileID: 0}
     - target: {fileID: 1675374330218717551, guid: 087d77703c9d1d44ba232713296d4f70,
         type: 3}
