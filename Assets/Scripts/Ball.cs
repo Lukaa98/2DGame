@@ -100,7 +100,9 @@ public class Ball : MonoBehaviour
         isPressed = true;
         rb.isKinematic = true;
         lr.enabled = true;
-                FindObjectOfType<AudioManager>().Play("Stretch");
+              //  FindObjectOfType<AudioManager>().Play("Stretch");
+                        FindObjectOfType<SoundEffects>().StretchSound();
+
 
 
 
@@ -120,7 +122,7 @@ public class Ball : MonoBehaviour
         _birdWasLaunched = true;
         isClicked=true;
        // FindObjectOfType<AudioManager>().Play("Fly");
-          FindObjectOfType<SoundEffects>().StretchSound();
+          FindObjectOfType<SoundEffects>().FlySound();
 
 
 
