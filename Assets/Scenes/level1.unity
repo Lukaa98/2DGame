@@ -509,6 +509,10 @@ MonoBehaviour:
   levelMusic: {fileID: 1373124313}
   deathSong: {fileID: 1031863276}
   wonSong: {fileID: 994773677}
+  stretch: {fileID: 0}
+  birdfly: {fileID: 0}
+  Stretch: 0
+  Birdfly: 0
   levelSong: 1
   DeathSong: 0
   WonSong: 0
@@ -614,7 +618,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 25.675001
+  orthographic size: 25.659203
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3699,7 +3703,7 @@ PrefabInstance:
         type: 3}
       propertyPath: sounds.Array.data[1].clip
       value: 
-      objectReference: {fileID: 8300000, guid: b0ed6005844fbb449ae4b3b82018be64, type: 3}
+      objectReference: {fileID: 8300000, guid: ae2903c56e85cbe4f957236508e4ba4d, type: 3}
     - target: {fileID: 1675374330218717550, guid: 087d77703c9d1d44ba232713296d4f70,
         type: 3}
       propertyPath: sounds.Array.data[1].volume
