@@ -102,6 +102,8 @@ public class Ball : MonoBehaviour
         lr.enabled = true;
                 FindObjectOfType<AudioManager>().Play("Stretch");
 
+
+
         }
     }
 
@@ -117,7 +119,11 @@ public class Ball : MonoBehaviour
         lr.enabled = false;
         _birdWasLaunched = true;
         isClicked=true;
-        FindObjectOfType<AudioManager>().Play("Fly");
+       // FindObjectOfType<AudioManager>().Play("Fly");
+          FindObjectOfType<SoundEffects>().StretchSound();
+
+
+
 
 
         }
