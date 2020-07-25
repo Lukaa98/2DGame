@@ -8,10 +8,39 @@ public class SoundEffects : MonoBehaviour
    public AudioSource deathSong; 
    public AudioSource wonSong; 
 
-   
+   public AudioSource stretch;
+   public AudioSource birdfly;
+
+    
+
+
+   public bool Stretch = false;
+   public bool Birdfly = false;
+
+
    public bool levelSong = true;
    public bool DeathSong = false;
    public bool WonSong = false;
+
+   
+
+   
+        public void StretchSound()
+    {
+        if(stretch.isPlaying)
+        Stretch = false;
+        {
+            stretch.Stop();
+        }
+            if(!birdfly.isPlaying && Birdfly == false)
+            {
+
+                Birdfly = true;
+                birdfly.Play();
+
+            }
+        }
+
 
    
     public void LevelMusic()
@@ -54,6 +83,8 @@ public class SoundEffects : MonoBehaviour
 
             }
         }
-    }
+      }
+
+    
 
 
