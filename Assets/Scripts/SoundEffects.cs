@@ -25,7 +25,7 @@ public class SoundEffects : MonoBehaviour
    
 
    
-        public void StretchSound()
+        public void FlySound()
     {
         if(stretch.isPlaying)
         Stretch = false;
@@ -40,6 +40,24 @@ public class SoundEffects : MonoBehaviour
 
             }
         }
+
+
+        public void StretchSound()
+    {
+        if(birdfly.isPlaying)
+        Birdfly = false;
+        {
+            birdfly.Stop();
+        }
+            if(!stretch.isPlaying && Stretch == false)
+            {
+
+                Stretch = true;
+                stretch.Play();
+
+            }
+        }
+
 
 
    
