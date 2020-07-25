@@ -124,13 +124,7 @@ public class Ball : MonoBehaviour
        // FindObjectOfType<AudioManager>().Play("Fly");
           FindObjectOfType<SoundEffects>().FlySound();
 
-
-
-
-
         }
-
-
 
     }
 
