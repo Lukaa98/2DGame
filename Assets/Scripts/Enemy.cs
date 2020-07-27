@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
             Inventory.Reference.KilledEnemys += 1;
+            FindObjectOfType<AudioManager>().Play("Crush");
+
         }
 
            
