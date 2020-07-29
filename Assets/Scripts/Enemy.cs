@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 public class Enemy : MonoBehaviour
 {
+  [SerializeField] private GameObject _CloudParticlePrefab;
+
   public Ball ballobj = null;
   public GameObject levelLost;
   public float EnemysToKill = 2f;
@@ -22,6 +24,7 @@ public class Enemy : MonoBehaviour
 
         if (ball != null || collision.contacts[0].normal.y < -0.5) //null means it does not exists
         {
+          Instantiate(_CloudParticlePrefab,transform.position, Quaternion.identity);
             Destroy(gameObject);
             Inventory.Reference.KilledEnemys += 1;
             FindObjectOfType<AudioManager>().Play("Crush");
