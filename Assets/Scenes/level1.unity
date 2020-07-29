@@ -3897,6 +3897,11 @@ PrefabInstance:
       propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1320561815872386223, guid: 2b148cb40c766984cbdaa697e3c6fe8c,
+        type: 3}
+      propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2b148cb40c766984cbdaa697e3c6fe8c, type: 3}
 --- !u!1001 &1675374329522676611
