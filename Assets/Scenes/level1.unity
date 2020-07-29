@@ -747,7 +747,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 25.68289
+  orthographic size: 25.651337
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -4059,7 +4059,7 @@ PrefabInstance:
     - target: {fileID: 5009464594872204234, guid: a3085bd752d189e42931cb0c5763accf,
         type: 3}
       propertyPath: looping
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5009464594872204234, guid: a3085bd752d189e42931cb0c5763accf,
         type: 3}
@@ -4069,17 +4069,17 @@ PrefabInstance:
     - target: {fileID: 5009464594872204234, guid: a3085bd752d189e42931cb0c5763accf,
         type: 3}
       propertyPath: ShapeModule.m_Scale.x
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5009464594872204234, guid: a3085bd752d189e42931cb0c5763accf,
         type: 3}
       propertyPath: ShapeModule.m_Scale.y
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5009464594872204234, guid: a3085bd752d189e42931cb0c5763accf,
         type: 3}
       propertyPath: ShapeModule.m_Scale.z
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 5009464594872204234, guid: a3085bd752d189e42931cb0c5763accf,
         type: 3}
@@ -4125,6 +4125,16 @@ PrefabInstance:
         type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.data[1].outWeight
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5009464594872204234, guid: a3085bd752d189e42931cb0c5763accf,
+        type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5009464594872204234, guid: a3085bd752d189e42931cb0c5763accf,
+        type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 5009464594872204235, guid: a3085bd752d189e42931cb0c5763accf,
         type: 3}
