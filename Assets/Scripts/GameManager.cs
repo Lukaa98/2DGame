@@ -6,6 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public GameObject levelwon;
     public GameObject levelLost;
+    public GameObject PauseButton;
+    public GameObject RestartButton;
     
     bool controlBool = false;
 
@@ -14,7 +16,8 @@ public class GameManager : MonoBehaviour
 public void LevelWon()
 
  {
-
+    PauseButton.SetActive (false); 
+    RestartButton.SetActive (false); 
     controlBool=true;
     levelwon.SetActive(true);
     Debug.Log("game Won");
@@ -27,7 +30,8 @@ public void LevelLost()
 
  {
    if(controlBool == false){
- 
+    PauseButton.SetActive (false); 
+    RestartButton.SetActive (false); 
     levelLost.SetActive(true);
     Debug.Log("level los12t ");
     FindObjectOfType<SoundEffects>().DeathSound();
