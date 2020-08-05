@@ -7,6 +7,8 @@ public class Enemy : MonoBehaviour
   [SerializeField] private GameObject _CloudParticlePrefab;
 
   public Ball ballobj = null;
+    public Ball ballobj1 = null;
+
   public GameObject levelLost;
   public float EnemysToKill = 2f;
   private float killedago;
