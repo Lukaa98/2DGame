@@ -12,6 +12,8 @@ public class Ball : MonoBehaviour
     private float maxDragDistance =  100f;
     private float _timeSittingAround;
     private bool _birdWasLaunched;
+      public float birdToLaunch = 2f;
+
 
 
 
@@ -56,7 +58,7 @@ public class Ball : MonoBehaviour
     {
              _timeSittingAround += Time.deltaTime;
     }
-    if(_timeSittingAround > 1)
+    if(_timeSittingAround > 1 && Inventory.Reference1.ThrownBirds>= birdToLaunch)
     {
          FindObjectOfType<GameManager>().LevelLost();
 
