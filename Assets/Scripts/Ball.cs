@@ -12,7 +12,7 @@ public class Ball : MonoBehaviour
     private float maxDragDistance =  100f;
     private float _timeSittingAround;
     private bool _birdWasLaunched;
-      public float birdToLaunch = 2f;
+      public float birdToLaunch = 1f;
 
 
 
@@ -50,6 +50,8 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
+        if (lr == null)
+   return;
         if (isPressed) {
             DragBall();
         }
@@ -58,9 +60,10 @@ public class Ball : MonoBehaviour
     {
              _timeSittingAround += Time.deltaTime;
     }
-    if(_timeSittingAround > 1 && Inventory.Reference1.ThrownBirds>= birdToLaunch)
+    if(_timeSittingAround > 1 && Inventory.Reference1.ThrownBirds >= birdToLaunch)
     {
          FindObjectOfType<GameManager>().LevelLost();
+        Destroy(gameObject);
 
 
     }
@@ -84,6 +87,7 @@ public class Ball : MonoBehaviour
         else {
                 rb.position = mousePosition;
              }
+
         }
 
     private void SetLineRendererPositions()
@@ -92,6 +96,7 @@ public class Ball : MonoBehaviour
         positions[0] = rb.position;
         positions[1] = slingRb.position;
         lr.SetPositions(positions);
+
     }
 
     private void OnMouseDown()
@@ -125,6 +130,9 @@ public class Ball : MonoBehaviour
         isClicked=true;
        // FindObjectOfType<AudioManager>().Play("Fly");
           FindObjectOfType<SoundEffects>().FlySound();
+         Inventory.Reference1.ThrownBirds += 1;
+
+          
 
         }
 
