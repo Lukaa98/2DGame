@@ -12,8 +12,7 @@ public class Ball : MonoBehaviour
     private float maxDragDistance =  100f;
     private float _timeSittingAround;
     private bool _birdWasLaunched;
-      public float birdToLaunch = 1f;
-
+    public float BirdsToThrow = 2f;
 
 
 
@@ -21,7 +20,7 @@ public class Ball : MonoBehaviour
     private Rigidbody2D rb;
     private SpringJoint2D sj;
     private Rigidbody2D slingRb;
-    private LineRenderer lr;
+  //  private LineRenderer lr;
     private TrailRenderer tr;
 
     private void Awake() 
@@ -31,11 +30,11 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sj = GetComponent<SpringJoint2D>();
         slingRb = sj.connectedBody;
-        lr = GetComponent<LineRenderer>();
+       // lr = GetComponent<LineRenderer>();
         tr = GetComponent<TrailRenderer>();
 
 
-        lr.enabled = false;
+       // lr.enabled = false;
         tr.enabled = false;
 
 
@@ -50,8 +49,6 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     public void Update()
     {
-        if (lr == null)
-   return;
         if (isPressed) {
             DragBall();
         }
@@ -59,11 +56,12 @@ public class Ball : MonoBehaviour
     if(_birdWasLaunched && GetComponent<Rigidbody2D>().velocity.magnitude <= 0.1)
     {
              _timeSittingAround += Time.deltaTime;
+             
+
     }
-    if(_timeSittingAround > 1 && Inventory.Reference1.ThrownBirds >= birdToLaunch)
+    if(_timeSittingAround > 1 && Inventory.Reference1.ThrownBirds >= BirdsToThrow)
     {
          FindObjectOfType<GameManager>().LevelLost();
-        Destroy(gameObject);
 
 
     }
@@ -73,7 +71,7 @@ public class Ball : MonoBehaviour
 
     private void DragBall() 
     {
-        SetLineRendererPositions();
+      //  SetLineRendererPositions();
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float distance = Vector2.Distance(mousePosition, slingRb.position);
@@ -87,17 +85,16 @@ public class Ball : MonoBehaviour
         else {
                 rb.position = mousePosition;
              }
-
         }
-
+/*
     private void SetLineRendererPositions()
     {
         Vector3[] positions = new Vector3[2];
         positions[0] = rb.position;
         positions[1] = slingRb.position;
         lr.SetPositions(positions);
-
     }
+    */
 
     private void OnMouseDown()
     {
@@ -106,9 +103,9 @@ public class Ball : MonoBehaviour
 
         isPressed = true;
         rb.isKinematic = true;
-        lr.enabled = true;
-              //  FindObjectOfType<AudioManager>().Play("Stretch");
-                        FindObjectOfType<SoundEffects>().StretchSound();
+       // lr.enabled = true;
+        //  FindObjectOfType<AudioManager>().Play("Stretch");
+        FindObjectOfType<SoundEffects>().StretchSound();
 
 
 
@@ -125,14 +122,13 @@ public class Ball : MonoBehaviour
         isPressed = false;
         rb.isKinematic = false;
         StartCoroutine(Release());
-        lr.enabled = false;
+       // lr.enabled = false;
         _birdWasLaunched = true;
         isClicked=true;
        // FindObjectOfType<AudioManager>().Play("Fly");
           FindObjectOfType<SoundEffects>().FlySound();
-         Inventory.Reference1.ThrownBirds += 1;
+            Inventory.Reference1.ThrownBirds += 1;
 
-          
 
         }
 
