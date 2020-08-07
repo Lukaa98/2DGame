@@ -53,18 +53,30 @@ public class Ball : MonoBehaviour
             DragBall();
         }
 
+    
     if(_birdWasLaunched && GetComponent<Rigidbody2D>().velocity.magnitude <= 0.1)
     {
              _timeSittingAround += Time.deltaTime;
+            Debug.Log("Bird time started");
+
+            if(_timeSittingAround > 1 )
+    {
+         FindObjectOfType<GameManager>().LevelLost();
+
+
+    }
+
              
 
     }
+    /*
     if(_timeSittingAround > 1 && Inventory.Reference1.ThrownBirds >= BirdsToThrow)
     {
          FindObjectOfType<GameManager>().LevelLost();
 
 
     }
+    */
 
         
     }
