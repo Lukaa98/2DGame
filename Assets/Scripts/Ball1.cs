@@ -52,10 +52,20 @@ public class Ball1 : MonoBehaviour
         if (isPressed) {
             DragBall();
         }
+    /*
 
-    if(_birdWasLaunched && GetComponent<Rigidbody2D>().velocity.magnitude <= 0.1)
+    if(_birdWasLaunched && Inventory.Reference1.ThrownBirds == BirdsToThrow)
     {
              _timeSittingAround += Time.deltaTime;
+            Debug.Log("Bird time started");
+
+            if(_timeSittingAround > 1 && Inventory.Reference1.ThrownBirds == BirdsToThrow)
+    {
+         FindObjectOfType<GameManager>().LevelLost();
+
+
+    }
+
              
 
     }
@@ -65,6 +75,7 @@ public class Ball1 : MonoBehaviour
 
 
     }
+    */
 
         
     }
