@@ -73,8 +73,6 @@ public class Ball : MonoBehaviour
     if(_timeSittingAround > 1 && Inventory.Reference1.ThrownBirds >= BirdsToThrow)
     {
          FindObjectOfType<GameManager>().LevelLost();
-
-
     }
     */
 
@@ -158,5 +156,4 @@ public class Ball : MonoBehaviour
     }
 
 }
-
 
