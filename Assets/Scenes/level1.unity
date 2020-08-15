@@ -135,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cc410703b677a4cae29ce00b2ffb7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BirdsToThrow: 2
+  BirdsToThrow: 1
 --- !u!4 &109619895
 Transform:
   m_ObjectHideFlags: 0
@@ -1538,7 +1538,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 28.221876
+  orthographic size: 28.212357
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
