@@ -13,6 +13,11 @@ public class Ball : MonoBehaviour
     private float _timeSittingAround;
     private bool _birdWasLaunched;
     public float BirdsToThrow = 2f;
+    public static int ThrownBirds = 0;
+
+    public static updateThrowBalls(){ thowballs += 1;}
+
+
 
 
 
@@ -137,7 +142,10 @@ public class Ball : MonoBehaviour
         isClicked=true;
        // FindObjectOfType<AudioManager>().Play("Fly");
           FindObjectOfType<SoundEffects>().FlySound();
-            Inventory.Reference1.ThrownBirds += 1;
+            //Inventory.Reference1.ThrownBirds += 1;
+
+            YourClassWhereTrowBallsIs.updateTrhowBalls()
+
 
 
         }
