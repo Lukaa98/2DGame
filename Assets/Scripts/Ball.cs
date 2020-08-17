@@ -12,7 +12,9 @@ public class Ball : MonoBehaviour
     private float maxDragDistance =  100f;
     private float _timeSittingAround;
     private bool _birdWasLaunched;
-    public float LastBird = 1f;
+
+      public float EnemysToKill = 2f;
+
     
 
 
@@ -61,23 +63,29 @@ public class Ball : MonoBehaviour
              _timeSittingAround += Time.deltaTime;
             Debug.Log("Bird time started");
 
-            if(_timeSittingAround > 1 )
+            if(_timeSittingAround > 1  )
     {
-         FindObjectOfType<GameManager>().LevelLost();
+      //   FindObjectOfType<GameManager>().LevelLost();
 
+       // if(Inventory.Reference.KilledEnemys != EnemysToKill )
+         //  { 
+          
+           //           FindObjectOfType<GameManager>().LevelLost();
+           //}
+
+
+ if(Inventory.Reference.KilledEnemys >= EnemysToKill)
+           { 
+          
+                      FindObjectOfType<GameManager>().LevelWon();
+           }
 
     }
 
 
 
     }
-    /*
-    if(_timeSittingAround > 1 && Inventory.Reference1.ThrownBirds >= BirdsToThrow)
-    {
-         FindObjectOfType<GameManager>().LevelLost();
-    }
-    */
-
+   
 
     }
 
@@ -98,15 +106,6 @@ public class Ball : MonoBehaviour
                 rb.position = mousePosition;
              }
         }
-/*
-    private void SetLineRendererPositions()
-    {
-        Vector3[] positions = new Vector3[2];
-        positions[0] = rb.position;
-        positions[1] = slingRb.position;
-        lr.SetPositions(positions);
-    }
-    */
 
     private void OnMouseDown()
     {
