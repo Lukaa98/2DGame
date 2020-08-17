@@ -17,11 +17,7 @@ public class Ball1 : MonoBehaviour
     public float BirdsToThrow = 2f;
        public GameObject balllls;
 
-       public  int ThrownBirds = 0;
-
-    public  updateThrowBalls(){ ThrownBirds += 1;}
-
-
+     
 
 
 
@@ -153,9 +149,8 @@ public class Ball1 : MonoBehaviour
         isClicked=true;
        // FindObjectOfType<AudioManager>().Play("Fly");
           FindObjectOfType<SoundEffects>().FlySound();
-            //Inventory.Reference1.ThrownBirds += 1;
+            Inventory.Reference1.ThrownBirds += 1;
 
-            YourClassWhereTrowBallsIs.updateTrhowBalls();
 
 
 
