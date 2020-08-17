@@ -15,6 +15,8 @@ public class Ball1 : MonoBehaviour
     private float _timeSittingAround;
     private bool _birdWasLaunched;
        public GameObject balllls;
+              public GameObject Bird1;
+
 
      
 
@@ -71,6 +73,8 @@ public class Ball1 : MonoBehaviour
         balllls.SetActive (true);
         Destroy(gameObject);
         Instantiate(_CloudParticlePrefab,transform.position, Quaternion.identity);
+        Bird1.SetActive (false); 
+
 
 
 
@@ -135,7 +139,7 @@ public class Ball1 : MonoBehaviour
         isClicked=true;
        // FindObjectOfType<AudioManager>().Play("Fly");
           FindObjectOfType<SoundEffects>().FlySound();
-            Inventory.Reference1.ThrownBirds += 1;
+          //  Inventory.Reference1.ThrownBirds += 1;
 
 
 
