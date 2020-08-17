@@ -14,7 +14,6 @@ public class Ball1 : MonoBehaviour
     private float maxDragDistance =  100f;
     private float _timeSittingAround;
     private bool _birdWasLaunched;
-    public float BirdsToThrow = 2f;
        public GameObject balllls;
 
      
@@ -81,12 +80,7 @@ public class Ball1 : MonoBehaviour
 
 
     }
-    /*
-    if(_timeSittingAround > 1 && Inventory.Reference1.ThrownBirds >= BirdsToThrow)
-    {
-         FindObjectOfType<GameManager>().LevelLost();
-    }
-    */
+    
 
 
     }
@@ -108,15 +102,7 @@ public class Ball1 : MonoBehaviour
                 rb.position = mousePosition;
              }
         }
-/*
-    private void SetLineRendererPositions()
-    {
-        Vector3[] positions = new Vector3[2];
-        positions[0] = rb.position;
-        positions[1] = slingRb.position;
-        lr.SetPositions(positions);
-    }
-    */
+
 
     private void OnMouseDown()
     {
