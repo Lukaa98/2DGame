@@ -12,13 +12,8 @@ public class Ball : MonoBehaviour
     private float maxDragDistance =  100f;
     private float _timeSittingAround;
     private bool _birdWasLaunched;
-    public float BirdsToThrow = 2f;
-    public  int ThrownBirds = 0;
-
-    public  updateThrowBalls(){
-         ThrownBirds += 1;
-         }
-
+    public float LastBird = 1f;
+    
 
 
 
@@ -144,9 +139,8 @@ public class Ball : MonoBehaviour
         isClicked=true;
        // FindObjectOfType<AudioManager>().Play("Fly");
           FindObjectOfType<SoundEffects>().FlySound();
-            //Inventory.Reference1.ThrownBirds += 1;
+            Inventory.Reference1.ThrownBirds += 1;
 
-            YourClassWhereTrowBallsIs.updateTrhowBalls();
 
 
 
