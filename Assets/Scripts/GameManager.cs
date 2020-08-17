@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     public GameObject levelLost;
     public GameObject PauseButton;
     public GameObject RestartButton;
+    public GameObject Bird;
+    public GameObject Bird1;
+    public GameObject Bird2;
     
     bool controlBool = false;
 
@@ -22,6 +25,13 @@ public void LevelWon()
     levelwon.SetActive(true);
     Debug.Log("game Won");
     FindObjectOfType<SoundEffects>().WonSound();
+        Bird2.SetActive (false); 
+
+    Bird1.SetActive (false); 
+
+    Bird.SetActive (false); 
+
+
 
 
  }
