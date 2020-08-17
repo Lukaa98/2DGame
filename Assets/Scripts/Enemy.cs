@@ -14,6 +14,9 @@ public class Enemy : MonoBehaviour
   private float killedago;
 
 
+
+
+
   private void OnCollisionEnter2D(Collision2D collision) //Sent when an incoming collider makes contact 
                                                            //with this object's collider (2D physics only).
                                                            //the Code between braces will be executed when 
@@ -41,6 +44,18 @@ public class Enemy : MonoBehaviour
           
                       FindObjectOfType<GameManager>().LevelWon();
            }
+
+
+             // if(Inventory.Reference.KilledEnemys != EnemysToKill )
+           //{ 
+          
+             //         FindObjectOfType<GameManager>().LevelLost();
+           //}
+
+
+           
+
+           
 
       }
 }
