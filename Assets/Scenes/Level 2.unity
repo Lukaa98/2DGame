@@ -1613,7 +1613,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 329273213}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -26.929996, y: -10.483, z: -0.33742}
+  m_LocalPosition: {x: -26.929996, y: -11.18, z: -0.33742}
   m_LocalScale: {x: 11.209077, y: 11.209077, z: 1.1209078}
   m_Children: []
   m_Father: {fileID: 1235798670}
@@ -2022,7 +2022,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 50.789394
+  orthographic size: 50.744038
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5567,7 +5567,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 74901ebe2db1e8f4ab51db7c53578c8f, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -10134,7 +10134,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 94.17}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 188.62305, y: -35.081543}
+  m_AnchoredPosition: {x: 188.62305, y: -35.081482}
   m_SizeDelta: {x: -1322.6216, y: 502.9673}
   m_Pivot: {x: 0.9, y: 1}
 --- !u!95 &2101262454
