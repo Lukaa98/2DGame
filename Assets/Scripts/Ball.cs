@@ -13,6 +13,8 @@ public class Ball : MonoBehaviour
     private float _timeSittingAround;
     private bool _birdWasLaunched;
            public GameObject Bird;
+               private LineRenderer lr;
+
 
 
 
@@ -31,9 +33,13 @@ public class Ball : MonoBehaviour
         sj = GetComponent<SpringJoint2D>();
         slingRb = sj.connectedBody;
         tr = GetComponent<TrailRenderer>();
+                lr = GetComponent<LineRenderer>();
+
 
 
         tr.enabled = false;
+                lr.enabled = false;
+
 
 
         releaseDelay = 1/(sj.frequency * 4);
@@ -69,7 +75,8 @@ public class Ball : MonoBehaviour
 
     private void DragBall() 
     {
-      
+              SetLineRendererPositions();
+
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float distance = Vector2.Distance(mousePosition, slingRb.position);
@@ -85,6 +92,14 @@ public class Ball : MonoBehaviour
              }
         }
 
+        private void SetLineRendererPositions()
+    {
+        Vector3[] positions = new Vector3[2];
+        positions[0] = rb.position;
+        positions[1] = slingRb.position;
+        lr.SetPositions(positions);
+    }
+
    
 
     private void OnMouseDown()
@@ -94,6 +109,8 @@ public class Ball : MonoBehaviour
 
         isPressed = true;
         rb.isKinematic = true;
+                lr.enabled = true;
+
               //  FindObjectOfType<AudioManager>().Play("Stretch");
                         FindObjectOfType<SoundEffects>().StretchSound();
 
@@ -111,9 +128,12 @@ public class Ball : MonoBehaviour
 
         isPressed = false;
         rb.isKinematic = false;
+                lr.enabled = false;
+
         StartCoroutine(Release());
         _birdWasLaunched = true;
         isClicked=true;
+
        // FindObjectOfType<AudioManager>().Play("Fly");
           FindObjectOfType<SoundEffects>().FlySound();
 
