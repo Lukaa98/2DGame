@@ -7,6 +7,7 @@ using System.Linq;
 public class Bomb : MonoBehaviour
 {
     
+  [SerializeField] private GameObject _CloudParticlePrefab;
 
     public float fieldOfImpact;
     public float force;
@@ -14,7 +15,6 @@ public class Bomb : MonoBehaviour
     public LayerMask LayerToHit;
     // Start is called before the first frame update
 
-      [SerializeField] private GameObject _CloudParticlePrefab;
 
    
     
@@ -27,6 +27,7 @@ public class Bomb : MonoBehaviour
         if (collision.contacts[0].normal.y < -0.5 )
         {
                       Instantiate(_CloudParticlePrefab,transform.position, Quaternion.identity);
+
 
                 Destroy(gameObject);
                 Collider2D[] objects = Physics2D.OverlapCircleAll(transform.position,fieldOfImpact,LayerToHit);
