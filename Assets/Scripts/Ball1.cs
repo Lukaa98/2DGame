@@ -11,7 +11,7 @@ public class Ball1 : MonoBehaviour
     private bool isPressed;
     private bool isClicked = false;
     private float releaseDelay;
-    private float maxDragDistance =  100f;
+    private float maxDragDistance =  200f;
     private float _timeSittingAround;
     private bool _birdWasLaunched;
        public GameObject balllls;
@@ -25,7 +25,7 @@ public class Ball1 : MonoBehaviour
     private Rigidbody2D rb;
     private SpringJoint2D sj;
     private Rigidbody2D slingRb;
-  //  private LineRenderer lr;
+    private LineRenderer lr;
     private TrailRenderer tr;
 
     private void Awake()
@@ -35,11 +35,11 @@ public class Ball1 : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         sj = GetComponent<SpringJoint2D>();
         slingRb = sj.connectedBody;
-       // lr = GetComponent<LineRenderer>();
+        lr = GetComponent<LineRenderer>();
         tr = GetComponent<TrailRenderer>();
 
 
-       // lr.enabled = false;
+        lr.enabled = false;
         tr.enabled = false;
 
 
@@ -91,7 +91,7 @@ public class Ball1 : MonoBehaviour
 
     private void DragBall()
     {
-      //  SetLineRendererPositions();
+        SetLineRendererPositions();
 
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         float distance = Vector2.Distance(mousePosition, slingRb.position);
@@ -108,6 +108,14 @@ public class Ball1 : MonoBehaviour
         }
 
 
+  private void SetLineRendererPositions()
+    {
+        Vector3[] positions = new Vector3[2];
+        positions[0] = rb.position;
+        positions[1] = slingRb.position;
+        lr.SetPositions(positions);
+    }
+
     private void OnMouseDown()
     {
         if(!isClicked)
@@ -115,7 +123,7 @@ public class Ball1 : MonoBehaviour
 
         isPressed = true;
         rb.isKinematic = true;
-       // lr.enabled = true;
+        lr.enabled = true;
         //  FindObjectOfType<AudioManager>().Play("Stretch");
         FindObjectOfType<SoundEffects>().StretchSound();
 
@@ -134,7 +142,7 @@ public class Ball1 : MonoBehaviour
         isPressed = false;
         rb.isKinematic = false;
         StartCoroutine(Release());
-       // lr.enabled = false;
+        lr.enabled = false;
         _birdWasLaunched = true;
         isClicked=true;
        // FindObjectOfType<AudioManager>().Play("Fly");
