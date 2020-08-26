@@ -32,7 +32,7 @@ public class Enemy : MonoBehaviour
         }
 
            
-             if(Inventory.Reference.KilledEnemys >= EnemysToKill /*&& ballobj != null*/)
+             if(Inventory.Reference.KilledEnemys >= EnemysToKill )
            { 
           
                       FindObjectOfType<GameManager>().LevelWon();
