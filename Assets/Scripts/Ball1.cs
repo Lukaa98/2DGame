@@ -11,7 +11,7 @@ public class Ball1 : MonoBehaviour
     private bool isPressed;
     private bool isClicked = false;
     private float releaseDelay;
-    private float maxDragDistance =  200f;
+    private float maxDragDistance =  20f;
     private float _timeSittingAround;
     private bool _birdWasLaunched;
        public GameObject balllls;
