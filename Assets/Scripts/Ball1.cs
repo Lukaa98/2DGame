@@ -15,7 +15,9 @@ public class Ball1 : MonoBehaviour
     private float _timeSittingAround;
     private bool _birdWasLaunched;
        public GameObject balllls;
-              public GameObject Bird1;
+              public GameObject Bird1logo;
+            public GameObject actualbird;
+
 
 
      
@@ -46,6 +48,7 @@ public class Ball1 : MonoBehaviour
         releaseDelay = 1/(sj.frequency * 4);
 
 
+        //DontDestroyOnLoad(gameObject);
 
 
     }
@@ -70,10 +73,14 @@ public class Ball1 : MonoBehaviour
     {
                     Debug.Log(" true");
 
+
+
         balllls.SetActive (true);
         Destroy(gameObject);
-        Instantiate(_CloudParticlePrefab,transform.position, Quaternion.identity);
-        Bird1.SetActive (false); 
+       // Instantiate(_CloudParticlePrefab,transform.position, Quaternion.identity);
+        //Bird1logo.SetActive (false); 
+
+        //actualbird.SetActive (false); 
 
 
 
@@ -81,9 +88,12 @@ public class Ball1 : MonoBehaviour
 
     
 
+      //  DontDestroyOnLoad(gameObject);
 
 
     }
+//DontDestroyOnLoad(gameObject);
+
     
 
 
