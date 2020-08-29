@@ -2,7 +2,7 @@
 
 public class followcomponent : MonoBehaviour
 {
-  public Transform targetToFollow;
+  public Transform targetToFollow2, targetToFollow1, targetToFollow ;
  // public Vector3 offset;//stores 3 float number for third person view
 public float left = 1f;
 public float right = 1f;
