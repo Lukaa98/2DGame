@@ -18,6 +18,11 @@ public class Ball1 : MonoBehaviour
               public GameObject Bird1logo;
             public GameObject actualbird;
 
+            public GameObject follow1;
+            
+                        public GameObject follow2;
+
+
 
 
      
@@ -77,12 +82,16 @@ public class Ball1 : MonoBehaviour
 
         balllls.SetActive (true);
         Destroy(gameObject);
-       // Instantiate(_CloudParticlePrefab,transform.position, Quaternion.identity);
-        //Bird1logo.SetActive (false); 
+        Instantiate(_CloudParticlePrefab,transform.position, Quaternion.identity);
+        Bird1logo.SetActive (false); 
 
         //actualbird.SetActive (false); 
 
 
+
+
+           follow2.GetComponent<followcomponent2>().enabled= false;
+          follow1.GetComponent<followcomponent1>().enabled= true;
 
 
 
