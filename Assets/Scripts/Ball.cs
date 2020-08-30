@@ -13,7 +13,11 @@ public class Ball : MonoBehaviour
     private float _timeSittingAround;
     private bool _birdWasLaunched;
            public GameObject Bird;
-               private LineRenderer lr;
+               private LineRenderer lr; 
+                public GameObject follow;
+            
+                        public GameObject follow1;
+
 
 
 
@@ -34,6 +38,10 @@ public class Ball : MonoBehaviour
         slingRb = sj.connectedBody;
         tr = GetComponent<TrailRenderer>();
                 lr = GetComponent<LineRenderer>();
+
+            //    follow1.GetComponent<followcomponent1>().enabled= false;
+          follow.GetComponent<followcomponent>().enabled= true;
+
 
 
 
@@ -66,6 +74,8 @@ public class Ball : MonoBehaviour
          FindObjectOfType<GameManager>().LevelLost();
                      Bird.SetActive (false); 
 
+
+           
 
 
     }
