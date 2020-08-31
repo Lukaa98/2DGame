@@ -27,6 +27,8 @@ public class Bomb : MonoBehaviour
         if (collision.contacts[0].normal.y < -0.5 )
         {
                       Instantiate(_CloudParticlePrefab,transform.position, Quaternion.identity);
+                                  FindObjectOfType<AudioManager>().Play("Crush");
+
 
 
                 Destroy(gameObject);
