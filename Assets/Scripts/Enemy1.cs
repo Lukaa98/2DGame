@@ -6,10 +6,9 @@ public class Enemy1 : MonoBehaviour
 {
   [SerializeField] private GameObject _CloudParticlePrefab;
 
-  public Ball ballobj = null;
-  public GameObject levelLost;
-  public float EnemysToKill = 3f;
-  private float killedago;
+
+  public Ball1 ballobj = null;
+   // public Ball1 ballobj1 = null;
 
 
   private void OnCollisionEnter2D(Collision2D collision) //Sent when an incoming collider makes contact 
@@ -20,22 +19,22 @@ public class Enemy1 : MonoBehaviour
        
 
         Ball ball = collision.collider.GetComponent<Ball>();
+        Ball1 ball1 = collision.collider.GetComponent<Ball1>();
+       // Ball2 ball2 = collision.collider.GetComponent<Ball2>();
+
         //Enemy enemy = collision.collider.GetComponent<Enemy>();//if collision was not from the bird and maybe 
 
-        if (ball != null) //null means it does not exists
+        if (ball != null || ball1 != null || collision.contacts[0].normal.y < -0.1/*||ball2 != null*/) //null means it does not exists
         {
           Instantiate(_CloudParticlePrefab,transform.position, Quaternion.identity);
-            Destroy(gameObject);
+            //Destroy(gameObject);
             FindObjectOfType<AudioManager>().Play("Crush");
+            GetComponent<Rigidbody2D>().gravityScale = 1;
+
 
         }
 
-           
-             if(Inventory.Reference.KilledEnemys >= EnemysToKill /*&& ballobj != null*/)
-           { 
-          
-                      FindObjectOfType<GameManager>().LevelWon();
-           }
+         
 
       }
 }
