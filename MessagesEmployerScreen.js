@@ -30,6 +30,8 @@ import { employeerScheduleListAction } from '../../components/actions/ChatAction
 import { scheduleFeedbackAction, scheduleFeedbackRes } from '../../components/actions/ChatAction/ScheduleFeedbackAction';
 import colors from '../../../assets/color';
 import { Platform } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker'; // import this at the top of your file
+
 
 
 var PickerItem = Picker.Item;
@@ -69,6 +71,9 @@ export const MessagesEmployerScreen = ({ navigation }) => {
     const [employerSchedulerList, setEmployerSchedulerList] = useState([]);
     const [scheduleUserReview, setScheduleUserReview] = useState({});
     const [currentActiveJob, setCurrentActiveJob] = useState(null);
+
+    const [openJobsDropdown, setOpenJobsDropdown] = useState(false); // Add this state to control the visibility of dropdown
+
 
     const handleOpenBottomSheet = (item) => {
         setScheduleUserReview(item);
@@ -365,18 +370,39 @@ export const MessagesEmployerScreen = ({ navigation }) => {
 
 
 
+    
+        // Update the job list data for the dropdown picker
+        const jobsForDropdown = employeJobList.length > 0 
+        ? employeJobList[0].JobPosterTitles.map((job, index) => ({
+            label: job.title || 'Fallback job title',
+            value: job.id, // Here, value is the job's ID
+            icon: () => <Image source={employeJobList[0].Companies.length > 0 && employeJobList[0].Companies[0].logo ? { uri: employeJobList[0].Companies[0].logo } : images.defaultEmployer} style={{ height: '100%', width: '100%', marginBottom: 0, resizeMode: "cover", borderRadius: 26}} />
+          }))
+        : [];
+
+
+
+  // Handle job selection from the dropdown
+  const handleJobSelect = (selectedJobId) => {
+    const selectedJob = employeJobList[0].JobPosterTitles.find(job => job.id === selectedJobId);
+    appliedDataWithPost(selectedJob, employeJobList);
+    setOpenJobsDropdown(false);
+  }
 
 
 
 
-
-
-
-
-
-
-
-
+  console.log('employeJobList', employeJobList);
+  console.log('JobPosterTitles', employeJobList[0]?.JobPosterTitles);
+  console.log('jobsForDropdown', jobsForDropdown);
+  
+  
+  if (!employeJobList || !employeJobList[0] || !employeJobList[0].JobPosterTitles) {
+    console.error('Data for dropdown is not available');
+  } else {
+    console.log('Data for dropdown is available');
+  }
+  
 
 
 
@@ -405,6 +431,63 @@ export const MessagesEmployerScreen = ({ navigation }) => {
                             Add Job
                         </Text>
                     </TouchableOpacity>
+
+
+
+
+
+
+
+
+
+                    <TouchableOpacity
+  style={{ alignItems: "center", height: 54, justifyContent: "center", width: 54, alignSelf: "center", marginHorizontal: 10, borderRadius: 26 }}
+  onPress={() => setOpenJobsDropdown(!openJobsDropdown)}
+>
+  <View style={{ width: 54, height: 54, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: "center", justifyContent: "center", backgroundColor: '#fff' }}>
+    <Text>Switch Jobs</Text>
+  </View>
+  <Text numberOfLines={1} style={styles.text2}>
+    Switch Jobs
+  </Text>
+</TouchableOpacity>
+
+{openJobsDropdown && 
+   <DropDownPicker
+   items={jobsForDropdown}
+   defaultValue={jobsForDropdown[0]?.value}
+   containerStyle={{ height: 40, width: 150 }}
+   style={{ backgroundColor: '#fafafa' }}
+   itemStyle={{
+     justifyContent: 'flex-start',
+     color: 'white' // set text color to white to contrast against black background
+   }}
+   labelStyle={{
+     color: 'white' // ensuring label text color is also white
+   }}
+   dropDownStyle={{ backgroundColor: 'black' }}
+   onChangeItem={item => handleJobSelect(item.value)}
+/>
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                     <FlatList
                         showsHorizontalScrollIndicator={false}
                         horizontal={true}
