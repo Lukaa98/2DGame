@@ -1,4 +1,5 @@
-import React, { useState, useEffect, createRef } from 'react';
+/* eslint-disable no-const-assign */
+import React, { useState, useEffect, createRef , useRef } from 'react';
 import {
     View,
     Text,
@@ -94,12 +95,11 @@ export const MessagesEmployerScreen = ({ navigation }) => {
     const [scheduleUserReview, setScheduleUserReview] = useState({});
     const [currentActiveJob, setCurrentActiveJob] = useState(null);
     const [selectedJob, setSelectedJob] = useState('No job selected');
-    
     const [isSwitchJobsPressed, setSwitchJobsPressed] = useState(false);
-
-
-
+    // const [actJob, setActJob] = useState(null);
+    const actJobRef = useRef(null);
     const [modalVisible, setModalVisible] = useState(false);
+    const selectedJobRef = useRef(selectedJob);
 
 
     const handleOpenBottomSheet = (item) => {
@@ -328,13 +328,6 @@ export const MessagesEmployerScreen = ({ navigation }) => {
         dispatch(getChatListAction(item.id));
         dispatch(employeerScheduleListAction(item))
         dispatch(employeerAppliedJobWithPostAction(item))
-
-        if (item) {
-            setCurrentActiveJob(item)
-            actJob = item;
-            setSelectedJob(item.title); // Update the selected job
-        }
-
     }
 
     const goToChatScreen = (item) => {
@@ -417,22 +410,9 @@ export const MessagesEmployerScreen = ({ navigation }) => {
         dispatch(scheduleFeedbackAction(request));
     }
 
-
-    useEffect(() => {
-        const unsubscribe = navigation.addListener('blur', () => {
-            setSelectedJob(currentActiveJob ? currentActiveJob.title : 'No job selected'); // Update the selected job when navigating away
-        });
-
-        return unsubscribe;
-    }, [navigation, currentActiveJob]);
-
     return (
         <AVSafeArea>
             <StatusBar barStyle={'dark-content'}/>
-
-
-
-
             <View style={styles.container}>
   <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: 10, marginTop: 50 }}>
     <Text style={{ fontStyle: "normal", fontWeight: "bold", fontSize: 24, lineHeight: 29, color: "#25324D" }}>Messages</Text>
