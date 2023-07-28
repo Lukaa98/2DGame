@@ -409,6 +409,15 @@ export const MessagesEmployerScreen = ({ navigation }) => {
         dispatch(scheduleFeedbackAction(request));
     }
 
+
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('blur', () => {
+          setSelectedJob('No job selected'); // Reset the selected job when navigating away
+        });
+    
+        return unsubscribe;
+      }, [navigation]);
+
     return (
         <AVSafeArea>
             <StatusBar barStyle={'dark-content'}/>
