@@ -94,6 +94,7 @@ export const MessagesEmployerScreen = ({ navigation }) => {
     const [scheduleUserReview, setScheduleUserReview] = useState({});
     const [currentActiveJob, setCurrentActiveJob] = useState(null);
     const [selectedJob, setSelectedJob] = useState('No job selected');
+    
     const [isSwitchJobsPressed, setSwitchJobsPressed] = useState(false);
 
 
@@ -327,6 +328,13 @@ export const MessagesEmployerScreen = ({ navigation }) => {
         dispatch(getChatListAction(item.id));
         dispatch(employeerScheduleListAction(item))
         dispatch(employeerAppliedJobWithPostAction(item))
+
+        if (item) {
+            setCurrentActiveJob(item)
+            actJob = item;
+            setSelectedJob(item.title); // Update the selected job
+        }
+
     }
 
     const goToChatScreen = (item) => {
@@ -412,11 +420,11 @@ export const MessagesEmployerScreen = ({ navigation }) => {
 
     useEffect(() => {
         const unsubscribe = navigation.addListener('blur', () => {
-          setSelectedJob('No job selected'); // Reset the selected job when navigating away
+            setSelectedJob(currentActiveJob ? currentActiveJob.title : 'No job selected'); // Update the selected job when navigating away
         });
-    
+
         return unsubscribe;
-      }, [navigation]);
+    }, [navigation, currentActiveJob]);
 
     return (
         <AVSafeArea>
