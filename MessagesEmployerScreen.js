@@ -2,17 +2,27 @@ import React, { useState, useEffect, createRef } from 'react';
 import {
     View,
     Text,
+    TextInput,
+    Button,
     Image,
     ScrollView,
     TouchableOpacity,
     StyleSheet,
     FlatList,
     Dimensions,
+    SafeAreaView,
     StatusBar,
+    ToastAndroid,
+    Modal,
+    TouchableHighlight,
 } from 'react-native';
 import { Divider } from "react-native-elements";
 import ActionSheet from "react-native-actions-sheet";
-import Picker from "@gregfrench/react-native-wheel-picker";
+import LinearGradient from "react-native-linear-gradient";
+// import Picker from "@gregfrench/react-native-wheel-picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { messagesEmployerList, employerList } from "./messagesEmployerList";
 import { AVSafeArea } from "../../components/Common/SafeArea";
 import { useSelector, useDispatch } from "react-redux";
 import { getEmployeesJobListAction } from '../../components/actions/EmployeerAppliedJobAction/EmployerAppliedJobListAction';
@@ -30,7 +40,14 @@ import { employeerScheduleListAction } from '../../components/actions/ChatAction
 import { scheduleFeedbackAction, scheduleFeedbackRes } from '../../components/actions/ChatAction/ScheduleFeedbackAction';
 import colors from '../../../assets/color';
 import { Platform } from 'react-native';
+import { AVSocialIcon } from "../../components/Common/SocialIcon";
 import DropDownPicker from 'react-native-dropdown-picker'; // import this at the top of your file
+// import Icon from 'react-native-vector-icons/MaterialIcons';
+import { Picker } from '@react-native-picker/picker';
+import Icon from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome or any other icon library
+
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
 
 
 
@@ -38,7 +55,7 @@ var PickerItem = Picker.Item;
 
 const { width } = Dimensions.get("screen");
 var ws = null;
-ws = SocketIOClient('https://stgapi.avdajobs.com', {
+ws = SocketIOClient('https://api.avda.pineappleworkshop.com', {
     transports: ['websocket'],
     jsonp: false,
 });
@@ -56,9 +73,14 @@ export const MessagesEmployerScreen = ({ navigation }) => {
     const employerScheduleListRedux = useSelector(state => state.employeerScheduleListRes);
     console.log('employerScheduleListRedux', employerScheduleListRedux);
     const scheduleFeedbackRedux = useSelector(state => state.scheduleFeedbackRes ? state.scheduleFeedbackRes.scheduleFeedbackData : '');
+
     const [isEmployerApplied, setIsEmployerApplied] = useState(true);
     const [isEmployerMessages, setIsEmployerMessages] = useState(false);
     const [isEmployerScheduled, setIsEmployerScheduled] = useState(false);
+    const [date, setDate] = useState(new Date(2020, 10, 30));
+    const [mode, setMode] = useState("date");
+    const [startDate, setStartDate] = useState("");
+    const [show, setShow] = useState(false);
     const openScheduledPopUp = React.createRef();
     const openScheduledCalendarPopUp = React.createRef();
     const [appliedJobList, setAppliedJobList] = useState([]);
@@ -71,8 +93,12 @@ export const MessagesEmployerScreen = ({ navigation }) => {
     const [employerSchedulerList, setEmployerSchedulerList] = useState([]);
     const [scheduleUserReview, setScheduleUserReview] = useState({});
     const [currentActiveJob, setCurrentActiveJob] = useState(null);
+    const [selectedJob, setSelectedJob] = useState('No job selected');
+    const [isSwitchJobsPressed, setSwitchJobsPressed] = useState(false);
 
-    const [openJobsDropdown, setOpenJobsDropdown] = useState(false); // Add this state to control the visibility of dropdown
+
+
+    const [modalVisible, setModalVisible] = useState(false);
 
 
     const handleOpenBottomSheet = (item) => {
@@ -129,7 +155,9 @@ export const MessagesEmployerScreen = ({ navigation }) => {
 
     const refreshData = () => {
         dispatch(getEmployeesJobListAction());
+        // dispatch(getChatListAction());
         dispatch(getEmployeerJobListAction());
+        // dispatch(employeerScheduleListAction())
     }
 
     useEffect(() => {
@@ -212,25 +240,38 @@ export const MessagesEmployerScreen = ({ navigation }) => {
         }
     }, [createRoomRedux]);
 
+    const onChangeStartDate = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        const __ = dayjs(selectedDate).format("MM/DD/YYYY");
+        setStartDate(__);
+        setShow(false);
+    };
 
     const goToChat = (item) => {
         setItemUser(item)
         createRoomId(item);
     }
+
+
     const getProgressPercent = (date, time) => {
         let downTimeProgress = 0;
         if (time && date) {
+            // setInterval(() => {
             let splittedTime = time.split(":");
             var lastVar = splittedTime.pop();
             var restVar = splittedTime.join(":");
             let dt = `${date}T${restVar}`;
             let dt1 = new Date(dt);
             let dt2 = new Date();
+            // console.log('dt2===>', dt2, dt1, dt)
+
             var ms = moment(dt2, "DD/MM/YYYY HH:mm").diff(moment(dt1, "DD/MM/YYYY HH:mm"));
             var d = moment.duration(ms);
             let progressValue = (d.asHours() / 48) * 100;
             downTimeProgress = progressValue > 100 ? 100 : progressValue < 0 ? 0 : progressValue;
+            // console.log('downTimeProgress===>', downTimeProgress, ms, d.asHours())
             return 100 - downTimeProgress;
+            // }, 3000);
         }
 
         return downTimeProgress;
@@ -368,159 +409,185 @@ export const MessagesEmployerScreen = ({ navigation }) => {
         dispatch(scheduleFeedbackAction(request));
     }
 
-
-
-    
-        // Update the job list data for the dropdown picker
-        const jobsForDropdown = employeJobList.length > 0 
-        ? employeJobList[0].JobPosterTitles.map((job, index) => ({
-            label: job.title || 'Fallback job title',
-            value: job.id, // Here, value is the job's ID
-            icon: () => <Image source={employeJobList[0].Companies.length > 0 && employeJobList[0].Companies[0].logo ? { uri: employeJobList[0].Companies[0].logo } : images.defaultEmployer} style={{ height: '100%', width: '100%', marginBottom: 0, resizeMode: "cover", borderRadius: 26}} />
-          }))
-        : [];
-
-
-
-  // Handle job selection from the dropdown
-  const handleJobSelect = (selectedJobId) => {
-    const selectedJob = employeJobList[0].JobPosterTitles.find(job => job.id === selectedJobId);
-    appliedDataWithPost(selectedJob, employeJobList);
-    setOpenJobsDropdown(false);
-  }
-
-
-
-
-  console.log('employeJobList', employeJobList);
-  console.log('JobPosterTitles', employeJobList[0]?.JobPosterTitles);
-  console.log('jobsForDropdown', jobsForDropdown);
-  
-  
-  if (!employeJobList || !employeJobList[0] || !employeJobList[0].JobPosterTitles) {
-    console.error('Data for dropdown is not available');
-  } else {
-    console.log('Data for dropdown is available');
-  }
-  
-
-
-
-
-
-
     return (
         <AVSafeArea>
             <StatusBar barStyle={'dark-content'}/>
+
+
+
+
             <View style={styles.container}>
-                <View marginTop={20} marginHorizontal={10}>
-                    <Text style={{ fontStyle: "normal", fontWeight: "bold", fontSize: 24, lineHeight: 29, color: "#25324D" }}>Messages</Text>
-                </View>
-                <View height={80} marginTop={20} style={{ flexDirection: 'row' }}>
-                    <TouchableOpacity
-                        style={{alignItems: "center",height: 54,justifyContent: "center",width: 60,alignSelf: "center",marginHorizontal: 10,borderRadius: 8,}}
-                        onPress={() => navigation.navigate('PostJobSteps', { prevScreen: 'CompanyProfile' })}
-                    >
-                            <View style={{ width: 54, height: 54, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: "center", justifyContent: "center", backgroundColor: '#fff' }}>
-                          <Image
-                            source={images.PlusNew}
-                            style={{ width: 19, height: 19 }}
-                          />
-                        </View>
-                        <Text numberOfLines={1} style={styles.text2}>
-                            Add Job
-                        </Text>
-                    </TouchableOpacity>
+  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: 10, marginTop: 50 }}>
+    <Text style={{ fontStyle: "normal", fontWeight: "bold", fontSize: 24, lineHeight: 29, color: "#25324D" }}>Messages</Text>
 
-
-
-
-
-
-
-
-
-                    <TouchableOpacity
-  style={{ alignItems: "center", height: 54, justifyContent: "center", width: 54, alignSelf: "center", marginHorizontal: 10, borderRadius: 26 }}
-  onPress={() => setOpenJobsDropdown(!openJobsDropdown)}
+    {employeJobList[0]?.JobPosterTitles.length <= 1 ? (
+      <TouchableOpacity
+        style={{
+          alignItems: 'center',
+          height: 54,
+          justifyContent: 'center',
+          borderRadius: 8,
+          paddingHorizontal: 10, 
+        }}
+        onPress={() => setModalVisible(true)}
+      >
+      <View style={{ width: 54, height: 54, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
+        <Image
+          source={images.PlusNew}
+          style={{ width: 19, height: 19 }}
+        />
+      </View>
+      <Text
+        numberOfLines={1}
+        style={styles.text2}
+      >
+        Add Job
+      </Text>
+    </TouchableOpacity>
+  ) : (
+<TouchableOpacity
+  style={{
+    alignItems: 'center',
+    height: 54,
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginHorizontal: 10,
+    borderRadius: 8,
+    paddingHorizontal: 10, 
+  }}
+  onPress={() => {
+    setModalVisible(true);
+    setSwitchJobsPressed(true); // Update the state when the button is pressed
+  }}
 >
-  <View style={{ width: 54, height: 54, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: "center", justifyContent: "center", backgroundColor: '#fff' }}>
-    <Text>Switch Jobs</Text>
+  <View style={isSwitchJobsPressed ? { width: 24, height: 24, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' ,marginRight: 5 , marginBottom: 5} 
+                                   : { width: 50, height: 50, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff'}}>
+    <Image
+      source={isSwitchJobsPressed ? images.addJobOpen : images.Switchjob} // Use different images based on the state
+      style={isSwitchJobsPressed ? { width: 24, height: 24 } : { width: 24, height: 24 }} // Use different dimensions based on the state
+    />
   </View>
-  <Text numberOfLines={1} style={styles.text2}>
-    Switch Jobs
-  </Text>
+  {!isSwitchJobsPressed && ( // Only show the text if the button hasn't been pressed
+    <Text
+      numberOfLines={1}
+      style={styles.text2}
+    >
+      Switch Jobs
+    </Text>
+  )}
 </TouchableOpacity>
 
-{openJobsDropdown && 
-   <DropDownPicker
-   items={jobsForDropdown}
-   defaultValue={jobsForDropdown[0]?.value}
-   containerStyle={{ height: 40, width: 150 }}
-   style={{ backgroundColor: '#fafafa' }}
-   itemStyle={{
-     justifyContent: 'flex-start',
-     color: 'white' // set text color to white to contrast against black background
-   }}
-   labelStyle={{
-     color: 'white' // ensuring label text color is also white
-   }}
-   dropDownStyle={{ backgroundColor: 'black' }}
-   onChangeItem={item => handleJobSelect(item.value)}
-/>
+
+  )}
+
+{/* marginRight: 20 , marginBottom: 20 */}
+
+<Modal
+  animationType="slide"
+  transparent={true}
+  visible={modalVisible}
+  onRequestClose={() => {
+    setModalVisible(false)
+    setSwitchJobsPressed(false);
+    }}
+
+>
+<TouchableOpacity
+    style={{flex: 1}}
+    activeOpacity={1}
+    onPressOut={() => {
+      setModalVisible(false);
+      setSwitchJobsPressed(false); // Reset the state when the modal is closed
+    }}
+  >
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+      <TouchableOpacity
+        activeOpacity={1}
+        onPress={() => {}}
+      >
+           <View style={{ backgroundColor: 'white', padding: 7, borderRadius: 10, height: 245, width: 243, marginLeft: 100, marginBottom: 220, shadowColor: '#3A79F4', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.15, shadowRadius: 15, elevation: 15 }}>
+
+          {/* New field to display selected job */}
 
 
-}
+          <View style={{ marginBottom: 10, marginRight: 15, alignSelf: 'center', height: 25, width: 200, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+  <Text style={{ fontSize: 13, fontFamily: 'SF Pro Text', fontWeight: '400', color: '#25324D', textAlign: 'left' }}>{selectedJob}</Text>
+  <Image source={images.Checked_Icon} style={{ width: 19, height: 19, marginRight: -23 }}/>
+</View>
 
+          {/* addJobOpen */}
 
+          {/* Checked_Icon */}
+          <TouchableOpacity style={{ backgroundColor: 'white',  alignSelf: 'center',  justifyContent: 'center', alignItems: 'center', }}>
+          <Text style={{ fontSize: 12, fontFamily: 'SF Pro Text', fontWeight: '600', color: '#8692AC', textAlign: 'center', borderWidth: 1, borderColor: '#386BD4', borderRadius: 6, width: 216, height: 24 ,lineHeight: 24 }}>Edit job</Text>
 
+          </TouchableOpacity>
+          <View style={{ height: 1, backgroundColor: '#E4E7EE' , marginBottom: 11, marginTop: 15}} />
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    <FlatList
-                        showsHorizontalScrollIndicator={false}
-                        horizontal={true}
-                        style={{}}
-                        data={employeJobList.length > 0 ? employeJobList[0].JobPosterTitles : []}
-                        keyExtractor={(item, index) => "" + index}
-                        renderItem={({ item, index }) => {
-                            return (
-                                <TouchableOpacity key={index}
-                                    style={{alignItems: "center",height: 54,justifyContent: "center",width: 54,alignSelf: "center",marginHorizontal: 10,borderRadius: 26,}}
-                                    onPress={() => { appliedDataWithPost(item,employeJobList) }}
-                                >
-                                    <View style={{ width: 54, backgroundColor: colors.white, height: 54, borderRadius: 26, borderWidth: 2, borderColor: item.isSelected ? "#386BD4" : 'transparent', alignItems: "center", justifyContent: "center", }}>
-                                        <Image
-                                            resizeMode="cover"
-                                            source={employeJobList[0].Companies.length > 0 && employeJobList[0].Companies[0].logo ? { uri: employeJobList[0].Companies[0].logo } : images.defaultEmployer}
-                                            style={{ height: '100%', width: '100%', marginBottom: 0, resizeMode: "cover", borderRadius: 26}} />
-                                    </View>
-                                    <Text numberOfLines={1} style={styles.text2}>
-                                        {item.title}
-                                    </Text>
-                                </TouchableOpacity>
-                            )
-                        }}
-                    />
-                    {
-                        employeJobList && employeJobList.length == 0 &&
-                        <Text style={{ alignSelf: "center", flex: 3 }}>No jobs available!!</Text>
-                    }
+          <ScrollView>
+  {employeJobList[0]?.JobPosterTitles.map((item) => (
+    <TouchableHighlight
+      key={item.id}
+      onPress={() => {
+        appliedDataWithPost(item, employeJobList);
+        setSelectedJob(item.title); 
+        setModalVisible(false);
+        setSwitchJobsPressed(false); // Reset the state when a job is selected
+      }}
+      style={{ paddingBottom: 7, }}
+    >
+      <Text style={{ marginLeft: 7,fontSize: 13, fontFamily: 'SF Pro Text', fontWeight: '400', color: '#25324D' }}>{item.title}</Text>
+    </TouchableHighlight>
+  ))}
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate('PostJobSteps', { prevScreen: 'CompanyProfile' })
+                setModalVisible(false)
+              }}
+              style={{ marginLeft: 15, marginTop: 5 }}
+            >
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Image source={images.Vector} style={{ width: 14, height: 14 , marginRight: 5, marginLeft: -10}}/>
+                <Text style={{ fontSize: 16, fontFamily: 'SF Pro Text', fontWeight: 'bold', color: '#386BD4', textAlign: 'center'}}>Add a new job</Text>
                 </View>
+
+            </TouchableOpacity>
+          </ScrollView>
+        </View>
+      </TouchableOpacity>
+    </View>
+  </TouchableOpacity>
+</Modal>
+
+
+</View>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <View style={{ paddingHorizontal: 16, flex: 1 }}>
                     <View
-                        style={{flexDirection: "row",borderRadius: 6,backgroundColor: '#F2F2F2',alignSelf: "center",marginTop: 30,paddingVertical: 4,paddingHorizontal: 2,width: '100%', justifyContent: 'center',}}
+                        style={{
+                            flexDirection: "row",
+                            borderRadius: 6,
+                            backgroundColor: '#F2F2F2',
+                            alignSelf: "center",
+                            marginTop: 30,
+                            paddingVertical: 4,
+                            paddingHorizontal: 2,
+                            width: '100%',
+                            justifyContent: 'center',
+                        }}
                     >
                         <TouchableOpacity
                             onPress={() => onPressButton('applied')}
@@ -540,6 +607,16 @@ export const MessagesEmployerScreen = ({ navigation }) => {
                         </TouchableOpacity>
                     </View>
 
+
+
+
+
+
+
+
+
+
+
                     <ScrollView showsVerticalScrollIndicator={false}>
                         {isEmployerApplied ?
                             <View alignItems="center" style={{ paddingVertical: 20 }}>
@@ -548,18 +625,43 @@ export const MessagesEmployerScreen = ({ navigation }) => {
                                         return (
                                             <View key={index} style={{ width: '100%', paddingVertical: 2, marginBottom: 10, backgroundColor: '#FFFFFF', borderRadius: 8, shadowColor: '#25324D10', shadowOffset: { width: 0, height: 4 }, shadowRadius: 15, shadowOpacity: 1, elevation: 1 }}>
                                                 <TouchableOpacity
-                                                    style={{width: width - 10,minHeight: 68,paddingHorizontal: 12,paddingVertical: 10,}}onPress={() => { goToChat(item) }}
+                                                    style={{
+                                                        width: width - 10,
+                                                        minHeight: 68,
+                                                        // marginTop: 10,
+                                                        paddingHorizontal: 12,
+                                                        paddingVertical: 10,
+                                                        // justifyContent: "center",
+                                                        // backgroundColor: "#FFFFFF",
+                                                        // borderRadius: 10,
+                                                        // elevation: 1
+                                                    }}
+                                                    onPress={() => { goToChat(item) }}
                                                 >
                                                     <View style={{ flexDirection: "row", alignItems: "center", maxWidth: '80%', elevation: 1 }}>
                                                         <View>
                                                             <ProgressCircle
-                                                                percent={getProgressPercent(item.date, item.time)} radius={27} borderWidth={1} color="#3399FF" shadowColor="#f2f2f2" bgColor="#f2f2f2"
+                                                                percent={getProgressPercent(item.date, item.time)}
+                                                                radius={27}
+                                                                borderWidth={1}
+                                                                // color="#3399FF"
+                                                                // bgColor="#f2f2f2"
+                                                                color="#3399FF"
+                                                                shadowColor="#f2f2f2"
+                                                                bgColor="#f2f2f2"
                                                             >
                                                                 {
                                                                     (item.image != '' && item.image != null && item.image != undefined) ?
-                                                                        <Image source={{ uri: item.image }}resizeMode="cover"style={{ height: 48, width: 48, borderRadius: 48 }}/> 
-                                                                        :
-                                                                        <Image resizeMode="cover"style={{ height: 48, width: 48, borderRadius: 48 }} source={images.defaultUser}/>
+                                                                        <Image
+                                                                            source={{ uri: item.image }}
+                                                                            resizeMode="cover"
+                                                                            style={{ height: 48, width: 48, borderRadius: 48 }}
+                                                                        /> :
+                                                                        <Image
+                                                                            resizeMode="cover"
+                                                                            style={{ height: 48, width: 48, borderRadius: 48 }}
+                                                                            source={images.defaultUser}
+                                                                        />
                                                                 }
                                                             </ProgressCircle>
                                                         </View>
@@ -580,9 +682,6 @@ export const MessagesEmployerScreen = ({ navigation }) => {
                                     </View>
                                 }
                             </View> : isEmployerMessages ?
-
-
-// third part
                                 <View flexDirection="column" width="100%" justifyContent="center" alignItems="center" style={{ paddingVertical: 20 }}>
                                     {allChatList && allChatList.length > 0 ?
                                         allChatList.map((item, index) => {
@@ -750,8 +849,6 @@ export const MessagesEmployerScreen = ({ navigation }) => {
                     </ScrollView>
                 </View>
             </View>
-
-{/* part 4             */}
             <ActionSheet
                 ref={openScheduledPopUp}
                 headerAlwaysVisible
