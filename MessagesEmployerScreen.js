@@ -1,3 +1,6 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-dupe-keys */
+/* eslint-disable react-native/no-unused-styles */
 /* eslint-disable no-const-assign */
 import React, { useState, useEffect, createRef , useRef } from 'react';
 import {
@@ -42,14 +45,7 @@ import { scheduleFeedbackAction, scheduleFeedbackRes } from '../../components/ac
 import colors from '../../../assets/color';
 import { Platform } from 'react-native';
 import { AVSocialIcon } from "../../components/Common/SocialIcon";
-import DropDownPicker from 'react-native-dropdown-picker'; // import this at the top of your file
-// import Icon from 'react-native-vector-icons/MaterialIcons';
 import { Picker } from '@react-native-picker/picker';
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import FontAwesome or any other icon library
-
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
-
 
 
 var PickerItem = Picker.Item;
@@ -96,11 +92,7 @@ export const MessagesEmployerScreen = ({ navigation }) => {
     const [currentActiveJob, setCurrentActiveJob] = useState(null);
     const [selectedJob, setSelectedJob] = useState('No job selected');
     const [isSwitchJobsPressed, setSwitchJobsPressed] = useState(false);
-    // const [actJob, setActJob] = useState(null);
-    const actJobRef = useRef(null);
     const [modalVisible, setModalVisible] = useState(false);
-    const selectedJobRef = useRef(selectedJob);
-
 
     const handleOpenBottomSheet = (item) => {
         setScheduleUserReview(item);
@@ -410,164 +402,162 @@ export const MessagesEmployerScreen = ({ navigation }) => {
         dispatch(scheduleFeedbackAction(request));
     }
 
+    useEffect(() => {
+        const unsubscribe = navigation.addListener('blur', () => {
+          setSelectedJob('No job selected'); 
+        });
+
+        return unsubscribe;
+      }, [navigation]);
+
     return (
         <AVSafeArea>
             <StatusBar barStyle={'dark-content'}/>
             <View style={styles.container}>
-  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: 10, marginTop: 50 }}>
-    <Text style={{ fontStyle: "normal", fontWeight: "bold", fontSize: 24, lineHeight: 29, color: "#25324D" }}>Messages</Text>
-
-    {employeJobList[0]?.JobPosterTitles.length <= 1 ? (
-      <TouchableOpacity
-        style={{
-          alignItems: 'center',
-          height: 54,
-          justifyContent: 'center',
-          borderRadius: 8,
-          paddingHorizontal: 10, 
-        }}
-        onPress={() => setModalVisible(true)}
-      >
-      <View style={{ width: 54, height: 54, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
-        <Image
-          source={images.PlusNew}
-          style={{ width: 19, height: 19 }}
-        />
-      </View>
-      <Text
-        numberOfLines={1}
-        style={styles.text2}
-      >
-        Add Job
-      </Text>
-    </TouchableOpacity>
-  ) : (
-<TouchableOpacity
-  style={{
-    alignItems: 'center',
-    height: 54,
-    justifyContent: 'center',
-    alignSelf: 'center',
-    marginHorizontal: 10,
-    borderRadius: 8,
-    paddingHorizontal: 10, 
-  }}
-  onPress={() => {
-    setModalVisible(true);
-    setSwitchJobsPressed(true); // Update the state when the button is pressed
-  }}
->
-  <View style={isSwitchJobsPressed ? { width: 24, height: 24, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' ,marginRight: 5 , marginBottom: 5} 
-                                   : { width: 50, height: 50, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff'}}>
-    <Image
-      source={isSwitchJobsPressed ? images.addJobOpen : images.Switchjob} // Use different images based on the state
-      style={isSwitchJobsPressed ? { width: 24, height: 24 } : { width: 24, height: 24 }} // Use different dimensions based on the state
-    />
-  </View>
-  {!isSwitchJobsPressed && ( // Only show the text if the button hasn't been pressed
-    <Text
-      numberOfLines={1}
-      style={styles.text2}
-    >
-      Switch Jobs
-    </Text>
-  )}
-</TouchableOpacity>
 
 
-  )}
 
-{/* marginRight: 20 , marginBottom: 20 */}
+   
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: 10, marginTop: 50 }}>
+            <Text style={{ fontStyle: 'normal', fontWeight: 'bold', fontSize: 24, lineHeight: 29, color: '#25324D' }}>Messages</Text>
 
-<Modal
-  animationType="slide"
-  transparent={true}
-  visible={modalVisible}
-  onRequestClose={() => {
-    setModalVisible(false)
-    setSwitchJobsPressed(false);
-    }}
-
->
-<TouchableOpacity
-    style={{flex: 1}}
-    activeOpacity={1}
-    onPressOut={() => {
-      setModalVisible(false);
-      setSwitchJobsPressed(false); // Reset the state when the modal is closed
-    }}
-  >
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <TouchableOpacity
-        activeOpacity={1}
-        onPress={() => {}}
-      >
-           <View style={{ backgroundColor: 'white', padding: 7, borderRadius: 10, height: 245, width: 243, marginLeft: 100, marginBottom: 220, shadowColor: '#3A79F4', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.15, shadowRadius: 15, elevation: 15 }}>
-
-          {/* New field to display selected job */}
-
-
-          <View style={{ marginBottom: 10, marginRight: 15, alignSelf: 'center', height: 25, width: 200, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-  <Text style={{ fontSize: 13, fontFamily: 'SF Pro Text', fontWeight: '400', color: '#25324D', textAlign: 'left' }}>{selectedJob}</Text>
-  <Image source={images.Checked_Icon} style={{ width: 19, height: 19, marginRight: -23 }}/>
-</View>
-
-          {/* addJobOpen */}
-
-          {/* Checked_Icon */}
-          <TouchableOpacity style={{ backgroundColor: 'white',  alignSelf: 'center',  justifyContent: 'center', alignItems: 'center', }}>
-          <Text style={{ fontSize: 12, fontFamily: 'SF Pro Text', fontWeight: '600', color: '#8692AC', textAlign: 'center', borderWidth: 1, borderColor: '#386BD4', borderRadius: 6, width: 216, height: 24 ,lineHeight: 24 }}>Edit job</Text>
-
-          </TouchableOpacity>
-          <View style={{ height: 1, backgroundColor: '#E4E7EE' , marginBottom: 11, marginTop: 15}} />
-
-          <ScrollView>
-  {employeJobList[0]?.JobPosterTitles.map((item) => (
-    <TouchableHighlight
-      key={item.id}
-      onPress={() => {
-        appliedDataWithPost(item, employeJobList);
-        setSelectedJob(item.title); 
-        setModalVisible(false);
-        setSwitchJobsPressed(false); // Reset the state when a job is selected
-      }}
-      style={{ paddingBottom: 7, }}
-    >
-      <Text style={{ marginLeft: 7,fontSize: 13, fontFamily: 'SF Pro Text', fontWeight: '400', color: '#25324D' }}>{item.title}</Text>
-    </TouchableHighlight>
-  ))}
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate('PostJobSteps', { prevScreen: 'CompanyProfile' })
-                setModalVisible(false)
-              }}
-              style={{ marginLeft: 15, marginTop: 5 }}
-            >
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Image source={images.Vector} style={{ width: 14, height: 14 , marginRight: 5, marginLeft: -10}}/>
-                <Text style={{ fontSize: 16, fontFamily: 'SF Pro Text', fontWeight: 'bold', color: '#386BD4', textAlign: 'center'}}>Add a new job</Text>
+            {employeJobList[0]?.JobPosterTitles.length <= 1 ? (
+              <TouchableOpacity
+                style={{
+                  alignItems: 'center',
+                  height: 54,
+                  justifyContent: 'center',
+                  borderRadius: 8,
+                  paddingHorizontal: 10,
+                }}
+                onPress={() => setModalVisible(true)}
+              >
+                <View style={{ width: 54, height: 54, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
+                  <Image
+                    source={images.PlusNew}
+                    style={{ width: 19, height: 19 }}
+                  />
                 </View>
+                <Text
+                  numberOfLines={1}
+                  style={styles.text2}
+                >
+                  Add Job
+                </Text>
+              </TouchableOpacity>
+            ) : (
+              <TouchableOpacity
+                style={{
+                  alignItems: 'center',
+                  height: 54,
+                  justifyContent: 'center',
+                  alignSelf: 'center',
+                  marginHorizontal: 10,
+                  borderRadius: 8,
+                  paddingHorizontal: 10,
+                }}
+                onPress={() => {
+                  setModalVisible(true)
+                  setSwitchJobsPressed(true) // Update the state when the button is pressed
+                }}
+              >
+                <View style={isSwitchJobsPressed ? { width: 24, height: 24, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff', marginRight: 5, marginBottom: 5 } : { width: 50, height: 50, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
+                  <Image
+                    source={isSwitchJobsPressed ? images.addJobOpen : images.Switchjob} // Use different images based on the state
+                    style={isSwitchJobsPressed ? { width: 24, height: 24 } : { width: 24, height: 24 }} // Use different dimensions based on the state
+                  />
+                </View>
+                {!isSwitchJobsPressed && ( // Only show the text if the button hasn't been pressed
+                  <Text
+                    numberOfLines={1}
+                    style={styles.text2}
+                  >
+                    Switch Jobs
+                  </Text>
+                )}
+              </TouchableOpacity>
+            )}
 
-            </TouchableOpacity>
-          </ScrollView>
-        </View>
-      </TouchableOpacity>
-    </View>
-  </TouchableOpacity>
-</Modal>
+            {/* marginRight: 20 , marginBottom: 20 */}
 
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                setModalVisible(false)
+                setSwitchJobsPressed(false)
+              }}
+            >
+              <TouchableOpacity
+                style={{ flex: 1 }}
+                activeOpacity={1}
+                onPressOut={() => {
+                  setModalVisible(false)
+                  setSwitchJobsPressed(false) // Reset the state when the modal is closed
+                }}
+              >
+                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                  <TouchableOpacity
+                    activeOpacity={1}
+                    onPress={() => {}}
+                  >
+                    <View style={{ backgroundColor: 'white', padding: 7, borderRadius: 10, height: 245, width: 243, marginLeft: 100, marginBottom: 220, shadowColor: '#3A79F4', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.15, shadowRadius: 15, elevation: 15 }}>
+                      {/* New field to display selected job */}
 
-</View>
+                      <View style={{ marginBottom: 10, marginRight: 15, alignSelf: 'center', height: 25, width: 200, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                        <Text style={{ fontSize: 13, fontFamily: 'SF Pro Text', fontWeight: '400', color: '#25324D', textAlign: 'left' }}>{selectedJob}</Text>
+                        <Image
+                          source={images.Checked_Icon}
+                          style={{ width: 19, height: 19, marginRight: -23 }}
+                        />
+                      </View>
 
+                      {/* addJobOpen */}
 
+                      {/* Checked_Icon */}
+                      <TouchableOpacity style={{ backgroundColor: 'white', alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
+                        <Text style={{ fontSize: 12, fontFamily: 'SF Pro Text', fontWeight: '600', color: '#8692AC', textAlign: 'center', borderWidth: 1, borderColor: '#386BD4', borderRadius: 6, width: 216, height: 24, lineHeight: 24 }}>Edit job</Text>
+                      </TouchableOpacity>
+                      <View style={{ height: 1, backgroundColor: '#E4E7EE', marginBottom: 11, marginTop: 15 }} />
 
-
-
-
-
-
-
-
+                      <ScrollView>
+                        {employeJobList[0]?.JobPosterTitles.map((item) => (
+                          <TouchableHighlight
+                            key={item.id}
+                            onPress={() => {
+                              appliedDataWithPost(item, employeJobList)
+                              setSelectedJob(item.title)
+                              setModalVisible(false)
+                              setSwitchJobsPressed(false) // Reset the state when a job is selected
+                            }}
+                            style={{ paddingBottom: 7 }}
+                          >
+                            <Text style={{ marginLeft: 7, fontSize: 13, fontFamily: 'SF Pro Text', fontWeight: '400', color: '#25324D' }}>{item.title}</Text>
+                          </TouchableHighlight>
+                        ))}
+                        <TouchableOpacity
+                          onPress={() => {
+                            navigation.navigate('PostJobSteps', { prevScreen: 'CompanyProfile' })
+                            setModalVisible(false)
+                          }}
+                          style={{ marginLeft: 15, marginTop: 5 }}
+                        >
+                          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                            <Image
+                              source={images.Vector}
+                              style={{ width: 14, height: 14, marginRight: 5, marginLeft: -10 }}
+                            />
+                            <Text style={{ fontSize: 16, fontFamily: 'SF Pro Text', fontWeight: 'bold', color: '#386BD4', textAlign: 'center' }}>Add a new job</Text>
+                          </View>
+                        </TouchableOpacity>
+                      </ScrollView>
+                    </View>
+                  </TouchableOpacity>
+                </View>
+              </TouchableOpacity>
+            </Modal>
+          </View>
 
 
 
@@ -603,16 +593,6 @@ export const MessagesEmployerScreen = ({ navigation }) => {
                             <Text style={styles.textScheduled, { color: isEmployerScheduled ? '#25324D' : '#667287', fontWeight: isEmployerScheduled ? 'bold' : 'normal' }}>Scheduled</Text>
                         </TouchableOpacity>
                     </View>
-
-
-
-
-
-
-
-
-
-
 
                     <ScrollView showsVerticalScrollIndicator={false}>
                         {isEmployerApplied ?
