@@ -46,6 +46,8 @@ import colors from '../../../assets/color';
 import { Platform } from 'react-native';
 import { AVSocialIcon } from "../../components/Common/SocialIcon";
 import { Picker } from '@react-native-picker/picker';
+import { useIsFocused } from '@react-navigation/native';
+
 
 
 var PickerItem = Picker.Item;
@@ -93,6 +95,7 @@ export const MessagesEmployerScreen = ({ navigation }) => {
     const [selectedJob, setSelectedJob] = useState('No job selected');
     const [isSwitchJobsPressed, setSwitchJobsPressed] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
+    const isFocused = useIsFocused();
 
     const handleOpenBottomSheet = (item) => {
         setScheduleUserReview(item);
@@ -410,6 +413,13 @@ export const MessagesEmployerScreen = ({ navigation }) => {
         return unsubscribe;
       }, [navigation]);
 
+
+      useEffect(() => {
+        if (isFocused) {
+          setSwitchJobsPressed(false);
+        }
+      }, [isFocused]);
+
     return (
         <AVSafeArea>
             <StatusBar barStyle={'dark-content'}/>
@@ -417,139 +427,121 @@ export const MessagesEmployerScreen = ({ navigation }) => {
 
 
 
-   
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: 10, marginTop: 50 }}>
-            <Text style={{ fontStyle: 'normal', fontWeight: 'bold', fontSize: 24, lineHeight: 29, color: '#25324D' }}>Messages</Text>
 
-            {employeJobList[0]?.JobPosterTitles.length <= 1 ? (
-              <TouchableOpacity
-                style={{
-                  alignItems: 'center',
-                  height: 54,
-                  justifyContent: 'center',
-                  borderRadius: 8,
-                  paddingHorizontal: 10,
-                }}
-                onPress={() => setModalVisible(true)}
-              >
-                <View style={{ width: 54, height: 54, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
-                  <Image
-                    source={images.PlusNew}
-                    style={{ width: 19, height: 19 }}
-                  />
-                </View>
-                <Text
-                  numberOfLines={1}
-                  style={styles.text2}
-                >
-                  Add Job
-                </Text>
-              </TouchableOpacity>
-            ) : (
-              <TouchableOpacity
-                style={{
-                  alignItems: 'center',
-                  height: 54,
-                  justifyContent: 'center',
-                  alignSelf: 'center',
-                  marginHorizontal: 10,
-                  borderRadius: 8,
-                  paddingHorizontal: 10,
-                }}
-                onPress={() => {
-                  setModalVisible(true)
-                  setSwitchJobsPressed(true) // Update the state when the button is pressed
-                }}
-              >
-                <View style={isSwitchJobsPressed ? { width: 24, height: 24, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff', marginRight: 5, marginBottom: 5 } : { width: 50, height: 50, borderRadius: 27, borderWidth: 1, borderColor: colors.disabledColor, alignItems: 'center', justifyContent: 'center', backgroundColor: '#fff' }}>
-                  <Image
-                    source={isSwitchJobsPressed ? images.addJobOpen : images.Switchjob} // Use different images based on the state
-                    style={isSwitchJobsPressed ? { width: 24, height: 24 } : { width: 24, height: 24 }} // Use different dimensions based on the state
-                  />
-                </View>
-                {!isSwitchJobsPressed && ( // Only show the text if the button hasn't been pressed
-                  <Text
-                    numberOfLines={1}
-                    style={styles.text2}
-                  >
-                    Switch Jobs
-                  </Text>
-                )}
-              </TouchableOpacity>
-            )}
 
-            {/* marginRight: 20 , marginBottom: 20 */}
+            <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginHorizontal: 10, marginTop: 50 }}>
+                <Text style={{ fontStyle: 'normal', fontWeight: 'bold', fontSize: 24, lineHeight: 29, color: '#25324D' }}>Messages</Text>
+                    {/* if array has 0 or 1 job executes code in ( ) */}
+                    {employeJobList[0]?.JobPosterTitles.length <= 1 ? (
+                                <TouchableOpacity 
+                                    style={{ alignItems: 'center', height: 54, justifyContent: 'center', alignSelf: 'center', marginHorizontal: 10, borderRadius: 8, paddingHorizontal: 10 }}
+                                    onPress={() => {
+                                        // dabruneba
+                                        setModalVisible(true); // enables dropdown menu 
+                                        setSwitchJobsPressed(true); // enables switch jobs button (small open folder button when drop down is open)
+                                        }}> 
+                                            {/* shows add job button with plus. when pressed drop down is showing and plus button changes to open folder button */}
+                                            <View style={isSwitchJobsPressed && modalVisible ? styles.openFolderButtonStyle : styles.addJobAndSwithJobButtonStyle}>
+                                                <Image
+                                                    source={isSwitchJobsPressed && modalVisible ? images.addJobOpen : images.PlusNew}
+                                                    style={{ width: 24, height: 24 }}
+                                                />
+                                            </View>
+                                            
+                                            {!isSwitchJobsPressed && (
+                                                <Text numberOfLines={1} style={styles.text2}>
+                                                    Add Job
+                                                </Text>
+                                            )}
+                                </TouchableOpacity>
+                            ) : 
+                                // if there is more then 2 jobs available in array
+                            (
 
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={modalVisible}
-              onRequestClose={() => {
-                setModalVisible(false)
-                setSwitchJobsPressed(false)
-              }}
-            >
-              <TouchableOpacity
-                style={{ flex: 1 }}
-                activeOpacity={1}
-                onPressOut={() => {
-                  setModalVisible(false)
-                  setSwitchJobsPressed(false) // Reset the state when the modal is closed
-                }}
-              >
-                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                  <TouchableOpacity
-                    activeOpacity={1}
-                    onPress={() => {}}
-                  >
-                    <View style={{ backgroundColor: 'white', padding: 7, borderRadius: 10, height: 245, width: 243, marginLeft: 100, marginBottom: 220, shadowColor: '#3A79F4', shadowOffset: { width: 0, height: 0 }, shadowOpacity: 0.15, shadowRadius: 15, elevation: 15 }}>
-                      {/* New field to display selected job */}
+                                <TouchableOpacity 
+                                        style={{ alignItems: 'center', height: 54, justifyContent: 'center', alignSelf: 'center', marginHorizontal: 10, borderRadius: 8, paddingHorizontal: 10}}
+                                        onPress={() => {
+                                        setModalVisible(true);
+                                        setSwitchJobsPressed(true);
+                                }}>
+                                    <View style={isSwitchJobsPressed && modalVisible ? styles.openFolderButtonStyle : styles.addJobAndSwithJobButtonStyle }>
+                                        <Image
+                                            source={isSwitchJobsPressed && modalVisible ? images.addJobOpen : images.Switchjob}
+                                            style={{ width: 24, height: 24 }}
+                                        />
+                                    </View>
+                                    {!isSwitchJobsPressed && (
+                                        <Text numberOfLines={1} style={styles.text2}>
+                                          Switch Jobs
+                                        </Text>
+                                    )}
+                                    </TouchableOpacity>
+                            )}
 
-                      <View style={{ marginBottom: 10, marginRight: 15, alignSelf: 'center', height: 25, width: 200, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
-                        <Text style={{ fontSize: 13, fontFamily: 'SF Pro Text', fontWeight: '400', color: '#25324D', textAlign: 'left' }}>{selectedJob}</Text>
-                        <Image
-                          source={images.Checked_Icon}
-                          style={{ width: 19, height: 19, marginRight: -23 }}
-                        />
-                      </View>
-
-                      {/* addJobOpen */}
-
-                      {/* Checked_Icon */}
-                      <TouchableOpacity style={{ backgroundColor: 'white', alignSelf: 'center', justifyContent: 'center', alignItems: 'center' }}>
-                        <Text style={{ fontSize: 12, fontFamily: 'SF Pro Text', fontWeight: '600', color: '#8692AC', textAlign: 'center', borderWidth: 1, borderColor: '#386BD4', borderRadius: 6, width: 216, height: 24, lineHeight: 24 }}>Edit job</Text>
-                      </TouchableOpacity>
-                      <View style={{ height: 1, backgroundColor: '#E4E7EE', marginBottom: 11, marginTop: 15 }} />
-
-                      <ScrollView>
-                        {employeJobList[0]?.JobPosterTitles.map((item) => (
-                          <TouchableHighlight
-                            key={item.id}
-                            onPress={() => {
-                              appliedDataWithPost(item, employeJobList)
-                              setSelectedJob(item.title)
-                              setModalVisible(false)
-                              setSwitchJobsPressed(false) // Reset the state when a job is selected
+                            {/* drop down menu to switch jobs */}
+                        <Modal
+                            animationType="slide"
+                            transparent={true}
+                            visible={modalVisible}
+                            onRequestClose={() => {
+                                setModalVisible(false)
+                                setSwitchJobsPressed(false)
                             }}
-                            style={{ paddingBottom: 7 }}
-                          >
-                            <Text style={{ marginLeft: 7, fontSize: 13, fontFamily: 'SF Pro Text', fontWeight: '400', color: '#25324D' }}>{item.title}</Text>
-                          </TouchableHighlight>
-                        ))}
-                        <TouchableOpacity
-                          onPress={() => {
-                            navigation.navigate('PostJobSteps', { prevScreen: 'CompanyProfile' })
-                            setModalVisible(false)
-                          }}
-                          style={{ marginLeft: 15, marginTop: 5 }}
                         >
-                          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                            <Image
-                              source={images.Vector}
-                              style={{ width: 14, height: 14, marginRight: 5, marginLeft: -10 }}
-                            />
-                            <Text style={{ fontSize: 16, fontFamily: 'SF Pro Text', fontWeight: 'bold', color: '#386BD4', textAlign: 'center' }}>Add a new job</Text>
-                          </View>
+                        <TouchableOpacity
+                            style={{ flex: 1 }}
+                            activeOpacity={1}
+                            onPressOut={() => {
+                            setModalVisible(false)
+                            setSwitchJobsPressed(false) 
+                            }}
+                        >
+                            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                <TouchableOpacity
+                                    activeOpacity={1}
+                                    onPress={() => {}}
+                                > 
+                                
+                                 {/* starting dropdown code */}
+                                <View style={ styles.dropDownMenu }> 
+                                    <View style={styles.selectedJobInDropDownMenu}>
+                                        <Text style={styles.selectedJobInDropDownMenuText}>{selectedJob}</Text>
+                                        <Image source={images.Checked_Icon} style={{ width: 19, height: 19, marginRight: -23 }} />
+                                    </View>
+
+                                    <TouchableOpacity>
+                                        <Text style={styles.editJobButton}>Edit job</Text>
+                                    </TouchableOpacity>
+                                    <View style={{ height: 1, backgroundColor: '#E4E7EE', marginBottom: 11, marginTop: 15 }} />
+
+                                    <ScrollView>
+                                        {employeJobList[0]?.JobPosterTitles.map((item) => (
+                                        <TouchableHighlight
+                                            key={item.id}
+                                            onPress={() => {
+                                            appliedDataWithPost(item, employeJobList)
+                                            setSelectedJob(item.title)
+                                            setModalVisible(false)
+                                            setSwitchJobsPressed(false) 
+                                            }}
+                                            style={{ paddingBottom: 7 }}
+                                        >
+                                            <Text style={{ marginLeft: 7, fontSize: 13, fontFamily: 'SF Pro Text', fontWeight: '400', color: '#25324D' }}>{item.title}</Text>
+                                        </TouchableHighlight>
+                                        ))}
+                                    <TouchableOpacity
+                                    onPress={() => {
+                                        navigation.navigate('PostJobSteps', { prevScreen: 'CompanyProfile' })
+                                        setModalVisible(false)
+                                    }}
+                                     style={{ marginLeft: 15, marginTop: 5 }}>
+                                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                    <Image
+                                    source={images.Vector}
+                                    style={{ width: 14, height: 14, marginRight: 5, marginLeft: -10 }}
+                                    />
+                                    <Text style={{ fontSize: 16, fontFamily: 'SF Pro Text', fontWeight: 'bold', color: '#386BD4', textAlign: 'center' }}>Add a new job</Text>
+                                </View>
                         </TouchableOpacity>
                       </ScrollView>
                     </View>
@@ -596,8 +588,10 @@ export const MessagesEmployerScreen = ({ navigation }) => {
 
                     <ScrollView showsVerticalScrollIndicator={false}>
                         {isEmployerApplied ?
+                        (
                             <View alignItems="center" style={{ paddingVertical: 20 }}>
-                                {employeAppliedJobJobList && employeAppliedJobJobList.length > 0 ?
+                                {employeJobList[0]?.JobPosterTitles.length > 0 ? (
+                                 employeAppliedJobJobList && employeAppliedJobJobList.length > 0 ? (
                                     employeAppliedJobJobList.map((item, index) => {
                                         return (
                                             <View key={index} style={{ width: '100%', paddingVertical: 2, marginBottom: 10, backgroundColor: '#FFFFFF', borderRadius: 8, shadowColor: '#25324D10', shadowOffset: { width: 0, height: 4 }, shadowRadius: 15, shadowOpacity: 1, elevation: 1 }}>
@@ -654,13 +648,35 @@ export const MessagesEmployerScreen = ({ navigation }) => {
                                                 </TouchableOpacity>
                                             </View>
                                         )
-                                    }) : <View flex={1} alignItems="center" justifyContent="center">
-                                        <Text>Click on the job to see the applied chat list.</Text>
-                                    </View>
-                                }
-                            </View> : isEmployerMessages ?
+                                    })
+                                    ) : (
+                                        <View flex={1} alignItems="center" justifyContent="center">
+                                          <Image source={images.jobsImage} style={styles.jobsImage} />
+                                          <Text style={styles.statusTextStyles}>You don't have any matches</Text>
+                                        </View>
+                                      )
+                                    ) : (
+                                      <View flex={1} alignItems="center" justifyContent="center">
+                                          <Image source={images.jobsImage} style={styles.jobsImage} />
+                                          <Text style={styles.statusTextStyles}>You don't have any jobs posted</Text>
+                                        <TouchableOpacity
+                                          onPress={() => {
+                                            navigation.navigate('PostJobSteps', { prevScreen: 'CompanyProfile' });
+                                            setModalVisible(false);
+                                          }}
+                                          style={{ marginLeft: 15, marginTop: 5 }}
+                                        >
+                                          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                            <Text style={styles.postAJobButton}>Post a job</Text>
+                                          </View>
+                                        </TouchableOpacity>
+                                      </View>
+                                    )}
+                                  </View>
+                                ) : isEmployerMessages ?
                                 <View flexDirection="column" width="100%" justifyContent="center" alignItems="center" style={{ paddingVertical: 20 }}>
-                                    {allChatList && allChatList.length > 0 ?
+                                    {employeJobList[0]?.JobPosterTitles.length > 0 ? (
+                                      allChatList && allChatList.length > 0 ? (
                                         allChatList.map((item, index) => {
                                             return (
                                                 <View key={index} alignItems="center">
@@ -741,15 +757,31 @@ export const MessagesEmployerScreen = ({ navigation }) => {
                                                     <View style={{ width: width, height: 0.5, backgroundColor: '#CAD0DC', alignSelf: "center", marginTop: 4 }} />
                                                 </View>
                                             )
-                                        }) : <View flex={1} alignItems="center" justifyContent="center">
-                                            <Text>No messages available</Text>
-                                        </View>
-                                    }
+                                       })
+                                        ) : (
+                                                <View flex={1} alignItems="center" justifyContent="center">
+                                          <Image source={images.jobsImage} style={styles.jobsImage} />
+                                          <Text style={styles.statusTextStyles}> You don't have any messages </Text>
+                                                </View>
+                                        )
+                                        ) : (
+                                        <View flex={1} alignItems="center" justifyContent="center">
+                                          <Image source={images.jobsImage} style={styles.jobsImage} />
+                                          <Text style={styles.statusTextStyles}>You don't have any jobs posted</Text>
 
-                                </View> :
-                                <View alignItems="center" style={{ paddingVertical: 20 }}>
-                                    {employerSchedulerList && employerSchedulerList.length > 0 && employerSchedulerList.map((item, index) => {
-                                        return (
+                                                    <TouchableOpacity
+                                                        onPress={() => { navigation.navigate('PostJobSteps', { prevScreen: 'CompanyProfile' }) 
+                                                        setModalVisible(false) }} style={{ marginLeft: 15, marginTop: 5 }} >
+                                                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                            <Text style={styles.postAJobButton}>Post a job</Text>
+                                                            </View>
+                                                    </TouchableOpacity>
+                                                        </View>
+                                                        )}
+                                                    </View> :
+                                        <View alignItems="center" style={{ paddingVertical: 20 }}>
+                                                {employeJobList[0]?.JobPosterTitles.length > 0 ? (
+                                                            employerSchedulerList && employerSchedulerList.length > 0 ? (employerSchedulerList.map((item, index) => (
                                             <TouchableOpacity key={index} style={{ alignSelf: "center", marginBottom: 10, width: "100%" }} onPress={() => handleOpenBottomSheet(item)}>
                                                 <View style={styles.scheduleListMainTouch}>
                                                     <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
@@ -812,16 +844,33 @@ export const MessagesEmployerScreen = ({ navigation }) => {
                                                         </View>
                                                     </View>
                                                 </View>
-                                            </TouchableOpacity>
-                                        )
-                                    })}
-                                    {
-                                        employerSchedulerList.length == 0 &&
-                                        <View flex={1} alignItems="center" justifyContent="center">
-                                            <Text>No scheduled available</Text>
-                                        </View>
-                                    }
-                                </View>
+                                                </TouchableOpacity>
+                                                
+                                                                ))
+                                                                ) : (
+                                                                <View flex={1} alignItems="center" justifyContent="center">
+                                                                    <Image source={images.jobsImage} style={styles.jobsImage} />
+                                                                    <Text style={styles.statusTextStyles}>You don't have any interviews scheduled</Text>
+                                                                </View>
+                                                                )
+                                                            ) : (
+                                                                <View flex={1} alignItems="center" justifyContent="center">
+                                                                    <Image source={images.jobsImage} style={styles.jobsImage} />
+                                                                    <Text style={styles.statusTextStyles}>You don't have any jobs posted</Text>
+                                                                <TouchableOpacity
+                                                                    onPress={() => {
+                                                                    navigation.navigate('PostJobSteps', { prevScreen: 'CompanyProfile' });
+                                                                    setModalVisible(false);
+                                                                    }}
+                                                                    style={{ marginLeft: 15, marginTop: 5 }}
+                                                                >
+                                                                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                                                                    <Text style={styles.postAJobButton}>Post a job</Text>
+                                                                    </View>
+                                                                    </TouchableOpacity>
+                                                                </View>
+                                                            )}
+                                                            </View>
                         }
                     </ScrollView>
                 </View>
@@ -1183,5 +1232,116 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFFFFF",
         borderRadius: 10,
         shadowColor: '#25324D10', shadowOffset: { width: 0, height: 4 }, shadowRadius: 15, shadowOpacity: 1, elevation: 1
-    }
+    },
+
+    openFolderButtonStyle: {
+        width: 24,
+        height: 24,
+        borderRadius: 27,
+        borderWidth: 1,
+        borderColor: colors.disabledColor,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+        marginRight: 5,
+        marginBottom: 5,
+      },
+
+
+      addJobAndSwithJobButtonStyle: {
+        width: 50,
+        height: 50,
+        borderRadius: 27,
+        borderWidth: 1,
+        borderColor: colors.disabledColor,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+      },
+
+      dropDownMenu: {
+        backgroundColor: 'white', 
+        padding: 7, 
+        borderRadius: 10, 
+        height: 245, 
+        width: 243, 
+        marginLeft: 100, 
+        marginBottom: 220, 
+        shadowColor: '#3A79F4', 
+        hadowOffset: { width: 0, height: 0 }, 
+        shadowOpacity: 0.15, 
+        shadowRadius: 15, 
+        elevation: 15
+      },
+
+      selectedJobInDropDownMenu: {
+        marginBottom: 10,
+        marginRight: 15, 
+        alignSelf: 'center', 
+        height: 25, 
+        width: 200, 
+        flexDirection: 'row', 
+        alignItems: 'center', 
+        justifyContent: 'space-between', 
+      },
+
+      selectedJobInDropDownMenuText: {
+        fontSize: 13,
+        fontFamily: 'SF Pro Text', 
+        fontWeight: '400',
+        color: '#25324D', 
+        textAlign: 'left', 
+
+      },
+
+      editJobButton: {
+        fontSize: 12, 
+        fontFamily: 'SF Pro Text', 
+        fontWeight: '600', 
+        color: '#8692AC', 
+        textAlign: 'center', 
+        borderWidth: 1, 
+        borderColor: '#386BD4', 
+        borderRadius: 6, 
+        width: 216, 
+        height: 24, 
+        lineHeight: 24, 
+        backgroundColor: 'white', 
+        alignSelf: 'center', 
+        justifyContent: 'center', 
+        alignItems: 'center'
+       },
+
+     jobsImage: {
+        width: 200, 
+        height: 165, 
+        marginBottom: 33,
+        marginTop: 110,
+     },
+     
+      statusTextStyles: {
+        fontSize: 18,
+        fontFamily: 'SF Pro Display',
+        fontWeight: '700',
+        color: '#386BD4',
+        textAlign: 'center',
+      },
+
+      postAJobButton: {
+        fontSize: 13, 
+        fontFamily: 'SF Pro Text', 
+        fontWeight: '600', 
+        color: 'white', 
+        textAlign: 'center', 
+        borderWidth: 1, 
+        borderRadius: 25, 
+        width: 170, 
+        height: 36, 
+        lineHeight: 33, 
+        backgroundColor: '#386BD4', 
+        borderColor: '#386BD4', 
+        marginTop: 32 
+      }
+      
 })
+
