@@ -58,7 +58,6 @@ ws = SocketIOClient('https://api.avda.pineappleworkshop.com', {
     transports: ['websocket'],
     jsonp: false,
 });
-
 var actJob = ''
 
 export const MessagesEmployerScreen = ({ navigation }) => {
@@ -96,6 +95,17 @@ export const MessagesEmployerScreen = ({ navigation }) => {
     const [isSwitchJobsPressed, setSwitchJobsPressed] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const isFocused = useIsFocused();
+
+    console.log(selectedJob, "setSelectedJob123")
+
+    console.log(allChatList, "allChatList123")
+
+    
+
+// Function to handle the button press
+const handleJobsPress = () => {
+  openScheduledPopUp.current?.setModalVisible(true);
+};
 
     const handleOpenBottomSheet = (item) => {
         setScheduleUserReview(item);
@@ -403,15 +413,7 @@ export const MessagesEmployerScreen = ({ navigation }) => {
             schedulePerformanceStatus: status
         }
         dispatch(scheduleFeedbackAction(request));
-    }
-
-    useEffect(() => {
-        const unsubscribe = navigation.addListener('blur', () => {
-          setSelectedJob('No job selected'); 
-        });
-
-        return unsubscribe;
-      }, [navigation]);
+    };
 
 
       useEffect(() => {
@@ -524,7 +526,7 @@ export const MessagesEmployerScreen = ({ navigation }) => {
                                             setModalVisible(false)
                                             setSwitchJobsPressed(false) 
                                             }}
-                                            style={{ paddingBottom: 7 }}
+                                            style={{ paddingBottom: 7 , backgroundColor: 'red'}}
                                         >
                                             <Text style={{ marginLeft: 7, fontSize: 13, fontFamily: 'SF Pro Text', fontWeight: '400', color: '#25324D' }}>{item.title}</Text>
                                         </TouchableHighlight>
@@ -779,12 +781,43 @@ export const MessagesEmployerScreen = ({ navigation }) => {
                                                         </View>
                                                         )}
                                                     </View> :
-                                        <View alignItems="center" style={{ paddingVertical: 20 }}>
+
+
+                                        <View alignItems="center" style={{ paddingVertical: 20 , backgroundColor: 'red'}}>
                                                 {employeJobList[0]?.JobPosterTitles.length > 0 ? (
                                                             employerSchedulerList && employerSchedulerList.length > 0 ? (employerSchedulerList.map((item, index) => (
                                             <TouchableOpacity key={index} style={{ alignSelf: "center", marginBottom: 10, width: "100%" }} onPress={() => handleOpenBottomSheet(item)}>
                                                 <View style={styles.scheduleListMainTouch}>
                                                     <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                                        {/* to display infomration under scheduled tab viwyebt */}
                                                         <View style={{ flexDirection: 'row' }}>
                                                             <View style={{ justifyContent: "center", paddingHorizontal: 5 }}>
                                                                 <Image
@@ -809,6 +842,8 @@ export const MessagesEmployerScreen = ({ navigation }) => {
                                                                 </View>
                                                             </View>
                                                         </View>
+
+                                                        
                                                         <View style={{ height: '100%', flexDirection: 'row', alignItems: 'center' }}>
                                                             {
                                                                 item.schedulePerformanceStatus == 1 &&
@@ -875,90 +910,7 @@ export const MessagesEmployerScreen = ({ navigation }) => {
                     </ScrollView>
                 </View>
             </View>
-            <ActionSheet
-                ref={openScheduledPopUp}
-                headerAlwaysVisible
-                gestureEnabled
-                footerAlwaysVisible
-                footerHeight={4}
-            >
-                <View style={styles.actionSheetContainer}>
-                    <TouchableOpacity style={styles.actionImg} onPress={() => closeModal()}>
-                        <Image
-                            resizeMode='contain'
-                            source={require("../../../assets/images/Close_Vector.png")}
-                        />
-                    </TouchableOpacity>
 
-                    <View style={{ marginTop: 15 }}>
-                        <Image
-                            resizeMode='cover'
-                            style={styles.actionImg2}
-                            source={scheduleUserReview ? { uri: scheduleUserReview.profile_picture } : require("../../../assets/images/profile_round10.png")}
-                        />
-                        <Text style={styles.actionText1}>
-                            {scheduleUserReview ? scheduleUserReview.seekerName : ''}
-                        </Text>
-                        <Text style={styles.actionText2}>
-                            {scheduleUserReview ? scheduleUserReview.title : ''}
-                        </Text>
-
-                        <Image
-                            resizeMode='contain'
-                            style={styles.actionImg1}
-                            source={require("../../../assets/images/calendar_vector1.png")}
-                        />
-
-                        <Text style={styles.actionText3}>
-                            {scheduleUserReview ? scheduleUserReview.scheduleDate : ''}
-                        </Text>
-                        <Text style={styles.actionText4}>
-                            {scheduleUserReview ? ManageTime(scheduleUserReview.scheduleTime) : ''}
-                        </Text>
-
-                        <Divider style={{ width: '80%', height: 0.5, borderColor: '#CAD0DC', marginTop: 30, alignSelf: 'center' }} />
-
-                        <Text style={styles.actionText5}>How did it go?</Text>
-
-                        <TouchableOpacity style={[styles.actionTouchable1, { borderColor: scheduleUserReview.schedulePerformanceStatus == 1 ? '#110FAE' : '#E0E5F2' }]} onPress={() => {
-                            setFeedback('1')
-                            openScheduledPopUp.current?.setModalVisible(false);
-                        }}>
-                            <Image
-                                resizeMode='contain'
-                                style={{ alignSelf: 'center' }}
-                                source={require("../../../assets/images/like_vector.png")}
-                            />
-                            <Text style={styles.actionText6}>Good</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={[styles.actionTouchable2, { borderColor: scheduleUserReview.schedulePerformanceStatus == 2 ? '#110FAE' : '#E0E5F2' }]} onPress={() => {
-                            setFeedback('2')
-                            openScheduledPopUp.current?.setModalVisible(false);
-                        }}>
-                            <Image
-                                resizeMode='contain'
-                                style={{ alignSelf: 'center' }}
-                                source={require("../../../assets/images/unlike_vector.png")}
-                            />
-                            <Text style={styles.actionText6}>Bad</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity style={[styles.noShowTouchStyle, { borderColor: scheduleUserReview.schedulePerformanceStatus == 3 ? '#110FAE' : '#E0E5F2' }]} onPress={() => {
-                            setFeedback('3')
-                            openScheduledPopUp.current?.setModalVisible(false);
-                        }}>
-                            <Image
-                                resizeMode='contain'
-                                style={{ width: 12, height: 12, alignSelf: 'center' }}
-                                source={require("../../../assets/images/Close_Vector.png")}
-                            />
-                            <Text style={styles.actionText6}>No show</Text>
-                        </TouchableOpacity>
-                    </View>
-
-                </View>
-            </ActionSheet>
             <Toast ref={toastDisplayRef} position="top" positionValue={0} />
         </AVSafeArea>
     )
@@ -1145,6 +1097,7 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         alignSelf: 'center',
         marginBottom: 15,
+        backgroundColor: 'red'
     },
     actionText1: {
         fontWeight: "bold",
@@ -1180,7 +1133,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         lineHeight: 23,
         textAlign: 'center',
-        marginTop: '7%'
+        marginTop: '7%',
+        backgroundColor: 'red'
     },
     actionText6: {
         fontWeight: Platform.OS == 'android' ? 'bold' : "600",
@@ -1344,4 +1298,3 @@ const styles = StyleSheet.create({
       }
       
 })
-
