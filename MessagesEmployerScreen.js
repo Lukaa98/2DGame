@@ -47,6 +47,9 @@ import { Platform } from 'react-native';
 import { AVSocialIcon } from "../../components/Common/SocialIcon";
 import { Picker } from '@react-native-picker/picker';
 import { useIsFocused } from '@react-navigation/native';
+import DropdownMenu from './DropdownMenu'; // Import the DropdownMenu component
+import DropdownMenuJobs from './DropdownMenuJobs'; 
+
 
 
 
@@ -95,12 +98,77 @@ export const MessagesEmployerScreen = ({ navigation }) => {
     const [isSwitchJobsPressed, setSwitchJobsPressed] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const isFocused = useIsFocused();
+    const [mainFilter, setMainFilter] = useState("show_all");
+    const [schedulerData, setSchedulerData] = useState([...employerSchedulerList]); 
+    
+
+
 
     console.log(selectedJob, "setSelectedJob123")
 
     console.log(allChatList, "allChatList123")
+    const [selectedFilter, setSelectedFilter] = useState(null);
+    const handleFilterChange = (filter) => {
+        setSelectedFilter(filter);
+        // Apply filtering logic based on the selected filter here
+        // You can use the same logic you provided earlier in this function
+      };
+
+      const handleDropdownChange = (value) => {
+        // Do whatever you need to do with the selected value here
+        console.log(value);
+    }
+    
+      const handleMainDropdownChange = (value) => {
+        setMainFilter(value);
+      };
 
     
+
+      const enrichedSchedulerList = employerSchedulerList.map(item => {
+        if (!item.interestStatus) {
+          return { ...item, interestStatus: "show_all" };
+        }
+        return item;
+   });
+   
+   const filteredSchedulerList = enrichedSchedulerList.filter(item => {
+        if (mainFilter === "show_all") return true;
+        return item.interestStatus === mainFilter;
+   });
+   
+
+   const updateStatus = (itemToUpdate, status) => {
+    const updatedData = employerSchedulerList.map(item => {
+        if (item.id === itemToUpdate.id) { 
+            return {...item, interestStatus: status};
+        }
+        return item;
+    });
+    console.log(employerSchedulerList, "employerSchedulerList before update");
+
+    setSchedulerData(updatedData);
+};
+
+useEffect(() => {
+    setSchedulerData([...employerSchedulerList]);
+}, [employerSchedulerList]);
+
+
+
+    
+
+const handleJobStatusChange = (jobId, status) => {
+    const updatedJobs = schedulerData.map(job => {
+        if (job.id === jobId) {
+            return { ...job, interestStatus: status };
+        }
+        return job;
+    });
+    setSchedulerData(updatedJobs);
+};
+
+
 
 // Function to handle the button press
 const handleJobsPress = () => {
@@ -526,7 +594,7 @@ const handleJobsPress = () => {
                                             setModalVisible(false)
                                             setSwitchJobsPressed(false) 
                                             }}
-                                            style={{ paddingBottom: 7 , backgroundColor: 'red'}}
+                                            style={{ paddingBottom: 7 }} //  backgroundColor: 'green'
                                         >
                                             <Text style={{ marginLeft: 7, fontSize: 13, fontFamily: 'SF Pro Text', fontWeight: '400', color: '#25324D' }}>{item.title}</Text>
                                         </TouchableHighlight>
@@ -783,36 +851,23 @@ const handleJobsPress = () => {
                                                     </View> :
 
 
-                                        <View alignItems="center" style={{ paddingVertical: 20 , backgroundColor: 'red'}}>
-                                                {employeJobList[0]?.JobPosterTitles.length > 0 ? (
-                                                            employerSchedulerList && employerSchedulerList.length > 0 ? (employerSchedulerList.map((item, index) => (
-                                            <TouchableOpacity key={index} style={{ alignSelf: "center", marginBottom: 10, width: "100%" }} onPress={() => handleOpenBottomSheet(item)}>
+                                        <View alignItems="center" style={{ paddingVertical: 20 }}> 
+                                            {employeJobList[0]?.JobPosterTitles.length > 0 ? (
+                                                employerSchedulerList && employerSchedulerList.length > 0 ? (
+                                                    <View>
+                                                    <Text style={styles.statusTextStyles}>notes & options</Text>
+                                                    <DropdownMenu onFilterChange={handleMainDropdownChange} />
+                                                    {filteredSchedulerList.map((item, index) => (
+                                                        <TouchableOpacity
+                                                        key={index}
+                                                        style={{ alignContent: "center", marginBottom: 10, width: 400 }}
+                                                        onPress={() => handleOpenBottomSheet(item)}
+                                                        >
+
+
+
                                                 <View style={styles.scheduleListMainTouch}>
                                                     <View style={{ flexDirection: "row", justifyContent: 'space-between' }}>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -840,55 +895,35 @@ const handleJobsPress = () => {
                                                                         {item.title}
                                                                     </Text>
                                                                 </View>
+
+                                                   
                                                             </View>
+
                                                         </View>
 
-                                                        
+
+
                                                         <View style={{ height: '100%', flexDirection: 'row', alignItems: 'center' }}>
-                                                            {
-                                                                item.schedulePerformanceStatus == 1 &&
-                                                                <Image
-                                                                    resizeMode='contain'
-                                                                    source={require("../../../assets/images/good.png")}
-                                                                    style={{ position: 'absolute', top: -5, right: -3 }}
-                                                                />
-                                                            }
-                                                            {
-                                                                item.schedulePerformanceStatus == 2 &&
-                                                                <Image
-                                                                    resizeMode='contain'
-                                                                    source={require("../../../assets/images/bad.png")}
-                                                                    style={{ position: 'absolute', top: -5, right: -3 }}
-                                                                />
-                                                            }
-                                                            {
-                                                                item.schedulePerformanceStatus == 3 &&
-                                                                <Image
-                                                                    resizeMode='contain'
-                                                                    source={require("../../../assets/images/no_show.png")}
-                                                                    style={{ position: 'absolute', top: -5, right: -3 }}
-                                                                />
-                                                            }
-                                                            <TouchableOpacity>
-                                                                <Image
-                                                                    resizeMode='contain'
-                                                                    source={require("../../../assets/images/right_arrow.png")}
-                                                                // style={{ alignSelf: 'flex-end', marginTop: 10 }}
-                                                                />
-                                                            </TouchableOpacity>
+                                                        {/* <Text style={styles.statusTextStyles}>note</Text> */}
+
+
+
+
+                                                        <DropdownMenuJobs onFilterChange={handleFilterChange} />
+
                                                         </View>
                                                     </View>
                                                 </View>
                                                 </TouchableOpacity>
-                                                
-                                                                ))
-                                                                ) : (
-                                                                <View flex={1} alignItems="center" justifyContent="center">
-                                                                    <Image source={images.jobsImage} style={styles.jobsImage} />
-                                                                    <Text style={styles.statusTextStyles}>You don't have any interviews scheduled</Text>
-                                                                </View>
-                                                                )
-                                                            ) : (
+                                                        ))}
+                                                        </View>
+                                                    ) : (
+                                                        <View flex={1} alignItems="center" justifyContent="center">
+                                                        <Image source={images.jobsImage} style={styles.jobsImage} />
+                                                        <Text style={styles.statusTextStyles}>You don't have any interviews scheduled</Text>
+                                                        </View>
+                                                    )
+                                                    ) : (
                                                                 <View flex={1} alignItems="center" justifyContent="center">
                                                                     <Image source={images.jobsImage} style={styles.jobsImage} />
                                                                     <Text style={styles.statusTextStyles}>You don't have any jobs posted</Text>
@@ -906,6 +941,13 @@ const handleJobsPress = () => {
                                                                 </View>
                                                             )}
                                                             </View>
+
+
+
+
+
+
+
                         }
                     </ScrollView>
                 </View>
@@ -1097,7 +1139,6 @@ const styles = StyleSheet.create({
         borderRadius: 50,
         alignSelf: 'center',
         marginBottom: 15,
-        backgroundColor: 'red'
     },
     actionText1: {
         fontWeight: "bold",
@@ -1134,7 +1175,7 @@ const styles = StyleSheet.create({
         lineHeight: 23,
         textAlign: 'center',
         marginTop: '7%',
-        backgroundColor: 'red'
+        // backgroundColor: 'red'
     },
     actionText6: {
         fontWeight: Platform.OS == 'android' ? 'bold' : "600",
