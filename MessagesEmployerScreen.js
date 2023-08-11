@@ -102,8 +102,6 @@ export const MessagesEmployerScreen = ({ navigation }) => {
     const [schedulerData, setSchedulerData] = useState([...employerSchedulerList]); 
     
 
-
-
     console.log(selectedJob, "setSelectedJob123")
 
     console.log(allChatList, "allChatList123")
@@ -114,17 +112,11 @@ export const MessagesEmployerScreen = ({ navigation }) => {
         // You can use the same logic you provided earlier in this function
       };
 
-      const handleDropdownChange = (value) => {
-        // Do whatever you need to do with the selected value here
-        console.log(value);
-    }
-    
       const handleMainDropdownChange = (value) => {
         setMainFilter(value);
       };
 
     
-
       const enrichedSchedulerList = employerSchedulerList.map(item => {
         if (!item.interestStatus) {
           return { ...item, interestStatus: "show_all" };
@@ -138,17 +130,7 @@ export const MessagesEmployerScreen = ({ navigation }) => {
    });
    
 
-   const updateStatus = (itemToUpdate, status) => {
-    const updatedData = employerSchedulerList.map(item => {
-        if (item.id === itemToUpdate.id) { 
-            return {...item, interestStatus: status};
-        }
-        return item;
-    });
-    console.log(employerSchedulerList, "employerSchedulerList before update");
 
-    setSchedulerData(updatedData);
-};
 
 useEffect(() => {
     setSchedulerData([...employerSchedulerList]);
@@ -157,16 +139,6 @@ useEffect(() => {
 
 
     
-
-const handleJobStatusChange = (jobId, status) => {
-    const updatedJobs = schedulerData.map(job => {
-        if (job.id === jobId) {
-            return { ...job, interestStatus: status };
-        }
-        return job;
-    });
-    setSchedulerData(updatedJobs);
-};
 
 
 
@@ -855,8 +827,12 @@ const handleJobsPress = () => {
                                             {employeJobList[0]?.JobPosterTitles.length > 0 ? (
                                                 employerSchedulerList && employerSchedulerList.length > 0 ? (
                                                     <View>
-                                                    <Text style={styles.statusTextStyles}>notes & options</Text>
-                                                    <DropdownMenu onFilterChange={handleMainDropdownChange} />
+
+                                                            <DropdownMenu onFilterChange={handleMainDropdownChange} />
+
+
+
+
                                                     {filteredSchedulerList.map((item, index) => (
                                                         <TouchableOpacity
                                                         key={index}
@@ -881,7 +857,11 @@ const handleJobsPress = () => {
                                                                 />
                                                             </View>
                                                             <View style={{ marginLeft: 15 }}>
-                                                                <Text style={styles.textDate}>
+                                                                <Text style={{      fontWeight: "700",
+                                                                                    fontSize: 14,
+                                                                                    lineHeight: 16,
+                                                                                    color: '#25324D',
+                                                                                    bottom: 5}}>
                                                                     {item.scheduleDate}
                                                                 </Text>
                                                                 <Text style={styles.textTime2}>
@@ -1255,18 +1235,18 @@ const styles = StyleSheet.create({
       },
 
       dropDownMenu: {
-        backgroundColor: 'white', 
-        padding: 7, 
-        borderRadius: 10, 
-        height: 245, 
-        width: 243, 
-        marginLeft: 100, 
-        marginBottom: 220, 
-        shadowColor: '#3A79F4', 
-        hadowOffset: { width: 0, height: 0 }, 
-        shadowOpacity: 0.15, 
-        shadowRadius: 15, 
-        elevation: 15
+        backgroundColor: 'white',
+        padding: 7,
+        borderRadius: 10,
+        height: 245,
+        width: 243,
+        marginLeft: Dimensions.get('window').width * 0.25, // 25% of screen width, adjust as required
+        marginBottom: Dimensions.get('window').height * 0.33, // 30% of screen height, adjust as required
+        shadowColor: '#3A79F4',
+        shadowOffset: { width: 0, height: 0 },
+        shadowOpacity: 0.15,
+        shadowRadius: 15,
+        elevation: 15,
       },
 
       selectedJobInDropDownMenu: {
